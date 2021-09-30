@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-#refactoring-extension-root {
+.root {
   width: 30%;
   height: 100%;
   position: fixed;
@@ -25,26 +25,14 @@ code {
   margin:10px;
 }
 
-#refactoring-extension-root.opened {
+.opened {
   height: 100%;
   width: 30%;
 }
 
-#refactoring-extension-root.closed {
+.closed {
   height: 5%;
   width: 5%;
   overflow-y: hidden;
   overflow-x: hidden;
-}
-
-#refactoring-extension-root iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: #f9f9f9;
-}
-
-.uxpainter-control {
-  margin: 5px;
-  float:right;
 }
