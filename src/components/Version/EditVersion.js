@@ -1,10 +1,9 @@
 import React from 'react';
-import { goBack, Link } from 'route-lite';
-import VersionView from './VersionView';
-import RefactoringListView from './RefactoringListView';
-import VersionList from './VersionList';
+import { VERSION_LIST } from '../../routing/types';
+import { PrimaryButton, SecondaryButton } from '../Button/Button';
+import RefactoringListView from '../RefactoringListView';
 
-class ExtendVersionView extends React.Component {
+class EditVersion extends React.Component {
   constructor(props) {
     super(props);
     if (!this.props.addingRefactoring) {
@@ -76,27 +75,33 @@ class ExtendVersionView extends React.Component {
           </div>,
           <div className={'row uxpainter-long-row'}>
             <div className={'col-5'}>
-              <Link className={'btn btn-secondary'} component={VersionListView}>
+              <SecondaryButton
+                className={'btn btn-secondary'}
+                to={VERSION_LIST}
+              >
                 <i className="fas fa-arrow-circle-left"></i> Back
-              </Link>
+              </SecondaryButton>
             </div>
             <div className={'col-5'}>
-              <Link
+              <PrimaryButton
                 className={'btn btn-dark'}
                 onClick={this.updateVersion}
-                component={VersionListView}
+                to={VERSION_LIST}
               >
                 Save <i className="fas fa-save"></i>
-              </Link>
+              </PrimaryButton>
             </div>
           </div>,
         ]}
         {this.state.addingRefactoring && [
           <RefactoringListView />,
           <div className={'row uxpainter-long-row col-12'}>
-            <Link className={'btn btn-danger'} onClick={this.cancelRefactoring}>
+            <Button
+              className={'btn btn-danger'}
+              onClick={this.cancelRefactoring}
+            >
               Cancel <i className="fas fa-times-circle"></i>
-            </Link>
+            </Button>
           </div>,
         ]}
       </div>
@@ -104,4 +109,4 @@ class ExtendVersionView extends React.Component {
   }
 }
 
-export default ExtendVersionView;
+export default EditVersion;

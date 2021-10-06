@@ -1,10 +1,10 @@
 /*global chrome*/
 import React from 'react';
 import Frame from 'react-frame-component';
-import { VersionList } from './VersionList';
+// import { VersionList } from './VersionList';
 //import Router from 'route-lite';
-import { Router } from '../util/Router';
-import WindowControl from './WindowControl';
+import { Router } from '../../routing/Router';
+import WindowControl from '../WindowControl';
 import mainStyle from './Main.module.css';
 
 const Main = () => {
@@ -37,9 +37,7 @@ const Main = () => {
     >
       <WindowControl />
       <div id={'main-content'} className={mainStyle.container}>
-        <Router>
-          <VersionList />
-        </Router>
+        <Router></Router>
       </div>
     </Frame>
   );

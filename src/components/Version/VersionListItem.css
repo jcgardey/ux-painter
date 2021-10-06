@@ -1,0 +1,27 @@
+
+.version {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em;
+}
+
+.name {
+    width: 50%;
+}
+
+.original {
+    color: grey;
+}
+
+.controls {
+    width: 30%;
+}
+
+.controlAction {
+    display: inline-block;
+    margin-right: 0.5em;
+}
+
+.active {
+    color: #ffc107;
+}

@@ -1,35 +1,31 @@
-import React from 'react';
-import { Link, goTo } from 'route-lite';
-import VersionList from './VersionList';
-import main from './Main.module.css';
-import { useRefactoringManager } from '../hooks/useRefactoringManager';
-import { PrimaryButton, SecondaryButton } from './Button';
+import React, { useState } from 'react';
+import main from '../Main/Main.module.css';
+import { useRefactoringManager } from '../../hooks/useRefactoringManager';
+import { PrimaryButton, SecondaryButton } from '../Button/Button';
+import { VERSION_LIST } from '../../routing/types';
 
-const VersionView = ({ version }) => {
+export default ({ version }) => {
   const manager = useRefactoringManager();
-
   const editedVersion = version.clone();
   const [versionName, setVersionName] = useState(
-    editedVersion.getName() &&
-      editedVersion.getName() != manager.getOriginalVersion().getName()
+    editedVersion.getName() != manager.getOriginalVersionName()
       ? editedVersion.getName()
       : ''
   );
 
   const handleChange = (e) => {
     setVersionName(e.target.value);
-    editedVersion.setName(e.target.value);
   };
 
   const handleSubmit = () => {
+    editedVersion.setName(versionName);
     if (
       editedVersion.getName() &&
-      mananger.getOriginalVersion().getName() != editedVersion.getName()
+      manager.getOriginalVersionName() != editedVersion.getName()
     ) {
-      mananger.addVersion(this.props.version);
-      mananger.setCurrentVersion(this.props.version);
-      mananger.save();
-      goTo(VersionListView);
+      manager.addVersion(editedVersion);
+      manager.setCurrentVersion(editedVersion);
+      manager.save();
     }
   };
 
@@ -54,16 +50,16 @@ const VersionView = ({ version }) => {
       </div>
       <div className={'row uxpainter-long-row'}>
         <div className={'col-5'}>
-          <SecondaryButton to={VersionListView}>
+          <SecondaryButton to={'VersionList'}>
             <i className="fas fa-arrow-circle-left"></i> Back
           </SecondaryButton>
         </div>
         <div className={'col-5'}>
-          <PrimaryButton onClick={handleSubmit}>Create</PrimaryButton>
+          <PrimaryButton onClick={handleSubmit} to={VERSION_LIST}>
+            Create
+          </PrimaryButton>
         </div>
       </div>
     </div>
   );
 };
-
-export default VersionView;

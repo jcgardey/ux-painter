@@ -1,0 +1,25 @@
+
+.list {
+    margin-top: 2em;
+}
+
+.controls {
+    margin-top: 1em;
+}
+
+.versionOverlay {
+    font-size:2em;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:#000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity:0.5;
+    opacity:0.5;
+    z-index:9998;
+    padding-top: 5%; 
+    padding-left: 35%;
+  }
