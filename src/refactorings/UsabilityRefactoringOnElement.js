@@ -1,74 +1,74 @@
-import XPathInterpreter from "./XPathInterpreter";
-import UsabilityRefactoring from "./UsabilityRefactoring";
-import ElementSelectionView from "../components/ElementSelectionView";
-import RefactoringOnElementPreviewer from "../previewers/RefactoringOnElementPreviewer";
+import XPathInterpreter from './XPathInterpreter';
+import UsabilityRefactoring from './UsabilityRefactoring';
+import ElementSelectionView from '../components/ElementSelectionView';
+import RefactoringOnElementPreviewer from '../previewers/RefactoringOnElementPreviewer';
 
 class UsabilityRefactoringOnElement extends UsabilityRefactoring {
+  constructor() {
+    super();
+  }
 
-    constructor() {
-        super();
+  setElementXpath(elementXpath) {
+    this.elementXpath = elementXpath;
+  }
+
+  setElement(anElement) {
+    this.targetElement = anElement;
+  }
+
+  getElementXpath() {
+    return this.elementXpath;
+  }
+
+  getElement() {
+    if (!this.targetElement) {
+      this.targetElement = new XPathInterpreter().getSingleElementByXpath(
+        this.elementXpath,
+        document.body
+      );
     }
+    return this.targetElement;
+  }
 
-    setElementXpath(elementXpath) {
-        this.elementXpath = elementXpath;
-    }
+  checkPreconditions() {
+    return this.getElement() !== null;
+  }
 
-    setElement(anElement) {
-        this.targetElement = anElement;
-    }
+  serialize() {
+    let json = super.serialize();
+    json.elementXpath = this.getElementXpath();
+    return json;
+  }
 
-    getElementXpath () {
-        return this.elementXpath;
-    }
+  isOnElement() {
+    return true;
+  }
 
-    getElement() {
-        if (!this.targetElement) {
-            this.targetElement = new XPathInterpreter().getSingleElementByXpath(this.elementXpath, document.body);
-        }
-        return this.targetElement;
-    }
+  getStyleElement() {
+    return this.targetElement;
+  }
 
-    checkPreconditions() {
-        return this.getElement() !== undefined;
-    }
+  getSelectionView() {
+    return ElementSelectionView;
+  }
 
+  clone() {
+    let clonedRefactoring = super.clone();
+    clonedRefactoring.setElementXpath(this.getElementXpath());
+    return clonedRefactoring;
+  }
 
-    serialize () {
-        let json = super.serialize();
-        json.elementXpath = this.getElementXpath();
-        return json;
-    }
+  setStyleProperty(elementName, style) {
+    this.getStyle()[elementName] = style;
+  }
 
-    isOnElement () {
-        return true;
-    }
+  isTargetAnImage() {
+    return this.getElement().tagName == 'IMG';
+  }
 
-    getStyleElement () {
-        return this.targetElement;
-    }
-
-    getSelectionView() {
-        return ElementSelectionView;
-    }
-
-    clone() {
-        let clonedRefactoring = super.clone();
-        clonedRefactoring.setElementXpath(this.getElementXpath());
-        return clonedRefactoring;
-    }
-
-    setStyleProperty(elementName, style) {
-        this.getStyle()[elementName] = style;
-    }
-
-    isTargetAnImage() {
-        return this.getElement().tagName == "IMG";
-    }
-
-    static getPreviewer() {
-        return new RefactoringOnElementPreviewer();
-    }
-
+  static getPreviewer() {
+    return new RefactoringOnElementPreviewer();
+  }
 }
 
 export default UsabilityRefactoringOnElement;
