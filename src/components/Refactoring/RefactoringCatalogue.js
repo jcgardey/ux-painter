@@ -38,6 +38,9 @@ const RefactoringCatalogue = () => {
           className={refactoringCatalogueStyle.searchInput}
           onChange={onChange}
         />
+        <i
+          className={`fas fa-search ${refactoringCatalogueStyle.searchIcon}`}
+        ></i>
       </div>
       <div className={refactoringCatalogueStyle.catalogue}>
         {refactorings.map((refactoringClass, i) => (

@@ -15,3 +15,10 @@
 .searchInput {
     width: 70%;
 }
+
+.searchIcon {
+    position: absolute;
+    bottom: 0.9em;
+    right: 2.7em;
+    color: #00a7c7;
+}
