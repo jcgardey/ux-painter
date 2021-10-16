@@ -1,0 +1,17 @@
+.title {
+    text-align: center;
+}
+
+.catalogue {
+    margin: 1em 0;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    margin: 1.2em 0;
+}
+
+.searchInput {
+    width: 70%;
+}

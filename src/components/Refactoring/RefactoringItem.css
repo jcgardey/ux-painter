@@ -1,0 +1,21 @@
+
+.refactoring {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+}
+
+.thumbnail {
+    width: 8em;
+    height: auto;
+    margin: 0.5em;
+}
+
+.name {
+    margin: 1em 0.5em;
+    font-size: 1.2em;
+    color: #e76f3d;
+    width: 50%;
+}

@@ -13,7 +13,7 @@
       "js": ["/static/main.js"]
     }
   ],
-  "web_accessible_resources":["/static/main.css", "/selection.gif", "/ref_examples/**"],
+  "web_accessible_resources":["/static/main.css", "/selection.gif", "/ref_examples/**", "/resources/**"],
   "background": {
     "scripts": ["app/background.js"]
   },
