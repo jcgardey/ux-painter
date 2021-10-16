@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import main from '../Main/Main.module.css';
+import main from '../Main/Main.css';
 import versionList from './VersionList.css';
 import { Button, PrimaryButton } from '../Button/Button';
 import { useRefactoringManager } from '../../hooks/useRefactoringManager';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFrame } from 'react-frame-component';
-import controlStyles from './WindowControl.module.css';
-import stylesRoot from '../index.module.css';
+import controlStyles from './WindowControl.css';
+import stylesRoot from '../index.css';
 
 const WindowControl = () => {
   const [hidden, setHidden] = useState(false);
