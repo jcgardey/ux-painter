@@ -13,14 +13,12 @@ export const VersionListItem = ({ version, current, switchToVersion }) => {
 
   return (
     <div className={versionStyle.version}>
-      <div className={versionStyle.name}>
-        <p className={versionStyle.original}>
-          {version.getName()}{' '}
-          {manager.getOriginalVersionName() == version.getName() && (
-            <i className="fas fa-lock"></i>
-          )}
-        </p>
-      </div>
+      <p className={versionStyle.name}>
+        {version.getName()}{' '}
+        {manager.getOriginalVersionName() == version.getName() && (
+          <i className="fas fa-lock"></i>
+        )}
+      </p>
       <div className={versionStyle.controls}>
         <a
           className={`${versionStyle.controlAction} ${

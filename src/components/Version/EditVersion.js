@@ -1,112 +1,71 @@
 import React from 'react';
-import { VERSION_LIST } from '../../routing/types';
-import { PrimaryButton, SecondaryButton } from '../Button/Button';
-import RefactoringListView from '../RefactoringListView';
+import { useRefactoringManager } from '../../hooks/useRefactoringManager';
+import { REFACTORING_CATALOGUE, VERSION_LIST } from '../../routing/types';
+import {
+  AddButton,
+  Controls,
+  PrimaryButton,
+  SecondaryButton,
+} from '../Button/Button';
+import editVersionStyle from './EditVersion.css';
 
-class EditVersion extends React.Component {
-  constructor(props) {
-    super(props);
-    if (!this.props.addingRefactoring) {
-      this.state = { addingRefactoring: false };
-    } else {
-      this.state = { addingRefactoring: this.props.addingRefactoring };
-    }
-    this.addRefactoring = this.addRefactoring.bind(this);
-    this.cancelRefactoring = this.cancelRefactoring.bind(this);
-    this.updateVersion = this.updateVersion.bind(this);
-  }
+const AppliedRefactoring = ({ refactoring }) => (
+  <div className={'row col-12'}>
+    <p>{refactoring.constructor.asString()}</p>
+  </div>
+);
 
-  addRefactoring() {
-    this.setState({ addingRefactoring: true });
-  }
+const DirtyRefactoring = ({ refactoring }) => (
+  <div className={'row col-12'}>
+    <p className={'uxpainter-message'}>
+      {dirtyRefactoring.constructor.asString()}*
+    </p>
+  </div>
+);
 
-  cancelRefactoring() {
-    this.setState({ addingRefactoring: false });
-  }
+const EditVersion = () => {
+  const manager = useRefactoringManager();
 
-  updateVersion() {
-    window.refactoringManager.saveDirtyRefactorings();
-  }
+  const updateVersion = () => window.refactoringManager.saveDirtyRefactorings();
 
-  render() {
-    const refactoringsApplied = window.refactoringManager
-      .getCurrentVersion()
-      .getRefactorings()
-      .map((refactoring) => {
-        return (
-          <div className={'row col-12'}>
-            <p>{refactoring.constructor.asString()}</p>
-          </div>
-        );
-      });
-
-    const dirtyRefactorings = window.refactoringManager
-      .getDirtyRefactorings()
-      .map((dirtyRefactoring) => {
-        return (
-          <div className={'row col-12'}>
-            <p className={'uxpainter-message'}>
-              {dirtyRefactoring.constructor.asString()}*
+  return (
+    <>
+      <h4 className={editVersionStyle.title}>
+        Version {manager.getCurrentVersion().getName()}
+      </h4>
+      <div className={editVersionStyle.applied}>
+        <h5 className={editVersionStyle.appliedLegend}>Refactorings Applied</h5>
+        {manager
+          .getCurrentVersion()
+          .getRefactorings()
+          .map((refactoring) => (
+            <AppliedRefactoring refactoring={refactoring} />
+          ))}
+        {manager.getDirtyRefactorings().map((dirtyRefactoring) => (
+          <DirtyRefactoring refactoring={refactoring} />
+        ))}
+        {manager.getCurrentVersion().getRefactorings().length == 0 &&
+          manager.getDirtyRefactorings().length == 0 && (
+            <p className={editVersionStyle.noApplied}>
+              This version has no refactorings.
             </p>
-          </div>
-        );
-      });
-
-    return (
-      <div className={'container'}>
-        <h5 className={'text-center uxpainter-message'}>
-          {window.refactoringManager.getCurrentVersion().getName()}
-        </h5>
-        {!this.state.addingRefactoring && [
-          <div className={'row col-12 uxpainter-long-row'}>
-            <h5 className={'text-center'}>Refactorings Applied</h5>
-            {refactoringsApplied}
-            {dirtyRefactorings}
-            {refactoringsApplied.length == 0 && dirtyRefactorings.length == 0 && (
-              <div className={'form-group'}>
-                <p>This version has no refactorings.</p>
-              </div>
-            )}
-          </div>,
-          <div className={'row uxpainter-long-row col-12'}>
-            <a className={'btn btn-warning'} onClick={this.addRefactoring}>
-              Add Refactoring <i className="fas fa-plus-circle"></i>
-            </a>
-          </div>,
-          <div className={'row uxpainter-long-row'}>
-            <div className={'col-5'}>
-              <SecondaryButton
-                className={'btn btn-secondary'}
-                to={VERSION_LIST}
-              >
-                <i className="fas fa-arrow-circle-left"></i> Back
-              </SecondaryButton>
-            </div>
-            <div className={'col-5'}>
-              <PrimaryButton
-                className={'btn btn-dark'}
-                onClick={this.updateVersion}
-                to={VERSION_LIST}
-              >
-                Save <i className="fas fa-save"></i>
-              </PrimaryButton>
-            </div>
-          </div>,
-        ]}
-        {this.state.addingRefactoring && [
-          <RefactoringListView />,
-          <div className={'row uxpainter-long-row col-12'}>
-            <Button
-              className={'btn btn-danger'}
-              onClick={this.cancelRefactoring}
-            >
-              Cancel <i className="fas fa-times-circle"></i>
-            </Button>
-          </div>,
-        ]}
+          )}
       </div>
-    );
-  }
-}
+      <Controls>
+        <AddButton className={'btn btn-warning'} to={REFACTORING_CATALOGUE}>
+          Add Refactoring <i className="fas fa-plus-circle"></i>
+        </AddButton>
+      </Controls>
+      <Controls>
+        <SecondaryButton to={VERSION_LIST}>
+          <i className="fas fa-arrow-circle-left"></i> Back
+        </SecondaryButton>
+        <PrimaryButton onClick={updateVersion} to={VERSION_LIST}>
+          Save <i className="fas fa-save"></i>
+        </PrimaryButton>
+      </Controls>
+    </>
+  );
+};
 
 export default EditVersion;

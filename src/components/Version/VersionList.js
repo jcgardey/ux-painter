@@ -33,7 +33,7 @@ export default () => {
   };
 
   return (
-    <div className={main.container}>
+    <>
       <h2 className={main.title}>Versions</h2>
       <div className={versionList.list}>
         {manager.getAllVersions().map((version, i) => (
@@ -55,6 +55,6 @@ export default () => {
           New version <i className="fas fa-plus-circle"></i>
         </PrimaryButton>
       </div>
-    </div>
+    </>
   );
 };

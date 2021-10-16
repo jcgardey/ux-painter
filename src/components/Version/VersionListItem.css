@@ -6,22 +6,27 @@
 }
 
 .name {
+    font-size: 1.2em;
     width: 50%;
-}
-
-.original {
     color: grey;
 }
 
 .controls {
-    width: 30%;
+    width: 40%;
+    display: flex;
+    align-items: center;
 }
 
 .controlAction {
     display: inline-block;
-    margin-right: 0.5em;
+    margin-right: 0.7em;
+    color: #00a7c7;
+}
+
+.controlAction:hover {
+    color: #9bcfe0;
 }
 
 .active {
-    color: #ffc107;
+    color: #feab6b;
 }
