@@ -43,3 +43,15 @@ export const SecondaryButton = ({ to, props, children }) => {
     </Button>
   );
 };
+
+export const AddButton = ({ to, props, children }) => {
+  return (
+    <Button className={buttonStyle.add} to={to} props={props}>
+      {children}
+    </Button>
+  );
+};
+
+export const Controls = ({ children }) => (
+  <div className={buttonStyle.controls}>{children}</div>
+);

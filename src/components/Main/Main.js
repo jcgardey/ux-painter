@@ -1,11 +1,9 @@
 /*global chrome*/
 import React from 'react';
 import Frame from 'react-frame-component';
-// import { VersionList } from './VersionList';
-//import Router from 'route-lite';
 import { Router } from '../../routing/Router';
 import WindowControl from '../WindowControl';
-import mainStyle from './Main.module.css';
+import mainStyle from './Main.css';
 
 const Main = () => {
   return (
@@ -13,13 +11,6 @@ const Main = () => {
       className={mainStyle.frame}
       head={
         <>
-          <link
-            type="text/css"
-            rel="stylesheet"
-            href={
-              'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
-            }
-          ></link>
           <link
             type="text/css"
             rel="stylesheet"
@@ -37,7 +28,7 @@ const Main = () => {
     >
       <WindowControl />
       <div id={'main-content'} className={mainStyle.container}>
-        <Router></Router>
+        <Router />
       </div>
     </Frame>
   );

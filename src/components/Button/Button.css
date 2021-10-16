@@ -1,18 +1,42 @@
 
 .primary {
-    background-color: #ff831f;
-    color: white;
+    background-color: #e76f3d;
+    color: #f3e9e7;
     display: inline-block;
-    padding: 0.5em;
+    padding: 0.7em;
     border-radius: 5px;
     text-decoration: none;
 }
 
+.primary:hover {
+    background-color: #feab6b;
+}
+
 .secondary {
-    background-color: black;
-    color: white;
+    background-color: #f3e9e7;
+    color: #e76f3d;
     display: inline-block;
-    padding: 0.5em;
+    padding: 0.7em;
     border-radius: 5px;
     text-decoration: none;
+}
+
+.add {
+    background-color: #00a7c7;
+    color: #f3e9e7;
+    display: inline-block;
+    padding: 0.7em;
+    border-radius: 5px;
+    text-decoration: none;    
+}
+
+.controls {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 1em auto;
+}
+
+.controls a {
+    margin: 0.7em;
 }
