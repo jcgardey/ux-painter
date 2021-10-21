@@ -3,11 +3,13 @@ import Version from '../components/Version/Version';
 import {
   EDIT_VERSION,
   REFACTORING_CATALOGUE,
+  SINGLE_ELEMENT_SELECTION,
   VERSION,
   VERSION_LIST,
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
+import { SingleElementSelection } from '../components/Selection/SingleElementSelection';
 
 export default [
   {
@@ -25,5 +27,9 @@ export default [
   {
     name: REFACTORING_CATALOGUE,
     Component: RefactoringCatalogue,
+  },
+  {
+    name: SINGLE_ELEMENT_SELECTION,
+    Component: SingleElementSelection,
   },
 ];
