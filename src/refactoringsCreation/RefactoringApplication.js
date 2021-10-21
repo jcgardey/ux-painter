@@ -1,6 +1,6 @@
 class RefactoringApplication {
   steps = [];
-  current = this.steps[0];
+  current = null;
   refactoring = null;
 
   constructor(aRefactoring) {
@@ -23,18 +23,24 @@ class RefactoringApplication {
     return this.steps.indexOf(step) + 1;
   }
 
-  nextStep() {
-    if (this.currentIndex() + 1 < this.steps.length) {
-      this.current = this.steps[this.currentIndex() + 1];
-    }
-    return this.current;
+  back() {
+    return this.currentIndex() - 1 >= 0
+      ? this.steps[this.currentIndex() - 1]
+      : this.currentStep();
   }
 
-  back() {
-    if (this.currentIndex() - 1 >= 0) {
-      this.current = this.steps[this.currentIndex() - 1];
-    }
-    return this.current;
+  next() {
+    return this.currentIndex() + 1 <= this.steps.length - 1
+      ? this.steps[this.currentIndex() + 1]
+      : this.currentStep();
+  }
+
+  goNext() {
+    this.current = this.next();
+  }
+
+  goBack() {
+    this.current = this.back();
   }
 
   nextSteps() {
@@ -46,7 +52,7 @@ class RefactoringApplication {
   backSteps() {
     return this.currentIndex() === 0
       ? []
-      : this.steps.slice(0, this.currentIndex() - 1);
+      : this.steps.slice(0, this.currentIndex());
   }
 }
 

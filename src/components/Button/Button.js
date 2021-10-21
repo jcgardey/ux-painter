@@ -36,9 +36,14 @@ export const PrimaryButton = ({ to, props, children, onClick }) => {
   );
 };
 
-export const SecondaryButton = ({ to, props, children }) => {
+export const SecondaryButton = ({ to, props, children, onClick }) => {
   return (
-    <Button className={buttonStyle.secondary} to={to} props={props}>
+    <Button
+      onClick={onClick}
+      className={buttonStyle.secondary}
+      to={to}
+      props={props}
+    >
       {children}
     </Button>
   );
@@ -52,9 +57,9 @@ export const AddButton = ({ to, props, children }) => {
   );
 };
 
-export const Link = ({ to, props, children }) => {
+export const Link = ({ to, props, children, onClick }) => {
   return (
-    <Button to={to} props={props}>
+    <Button to={to} props={props} onClick={onClick}>
       {children}
     </Button>
   );

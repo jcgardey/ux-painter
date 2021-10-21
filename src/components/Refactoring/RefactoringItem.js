@@ -10,7 +10,8 @@ export const RefactoringItem = ({ refactoringClass }) => {
 
   return (
     <Link
-      to={refactoringApplication.nextStep().view}
+      to={refactoringApplication.next().view}
+      onClick={() => refactoringApplication.goNext()}
       props={{ refactoringApplication }}
     >
       <div className={itemStyle.refactoring}>
