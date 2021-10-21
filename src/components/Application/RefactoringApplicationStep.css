@@ -1,0 +1,42 @@
+.step {
+    margin: 1.5em 0;
+    padding: 0.5em;
+}
+
+.stepContent {
+    padding: 0.6em;
+    font-size: 1em;
+}
+
+.stepName {
+    color: #feab6b;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0.5em 0;
+}
+
+.stepNumber {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    background-color: #feab6b;
+    border-radius: 20px;
+    color: #f3e9e7;
+    margin: 0 0.4em;
+}
+
+.disabledStep {
+    margin: 0.5em 0;
+    padding: 0.5em;
+}
+
+.disabledStepName {
+    color: #ebebeb;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.disabledStepNumber {
+    background-color: grey;
+    color: white
+}

@@ -44,7 +44,7 @@ const RefactoringCatalogue = () => {
       </div>
       <div className={refactoringCatalogueStyle.catalogue}>
         {refactorings.map((refactoringClass, i) => (
-          <RefactoringItem refactoring={new refactoringClass()} />
+          <RefactoringItem key={i} refactoringClass={refactoringClass} />
         ))}
       </div>
     </>

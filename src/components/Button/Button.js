@@ -4,7 +4,7 @@ import buttonStyle from './Button.css';
 
 export const Button = ({
   to,
-  className,
+  className = '',
   children,
   onClick: clickHandler,
   props,
@@ -13,7 +13,7 @@ export const Button = ({
 
   const onClick = (e) => {
     if (clickHandler) clickHandler(e);
-    router.show(to, props);
+    if (to) router.show(to, props);
   };
 
   return (
@@ -47,6 +47,14 @@ export const SecondaryButton = ({ to, props, children }) => {
 export const AddButton = ({ to, props, children }) => {
   return (
     <Button className={buttonStyle.add} to={to} props={props}>
+      {children}
+    </Button>
+  );
+};
+
+export const Link = ({ to, props, children }) => {
+  return (
+    <Button to={to} props={props}>
       {children}
     </Button>
   );
