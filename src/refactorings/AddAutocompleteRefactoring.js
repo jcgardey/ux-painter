@@ -1,114 +1,127 @@
-import UsabilityRefactoringOnElement from "./UsabilityRefactoringOnElement";
+import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 import Awesomplete from 'awesomplete/awesomplete';
 import 'awesomplete/awesomplete.css';
-import TurnInputIntoRadiosView from "../components/TurnInputIntoRadiosView";
-import AddAutocompletePreviewer from "../previewers/AddAutocompletePreviewer";
+import TurnInputIntoRadiosView from '../components/TurnInputIntoRadiosView';
+import AddAutocompletePreviewer from '../previewers/AddAutocompletePreviewer';
 
 class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
+  constructor() {
+    super();
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.values = [];
+  }
 
-    constructor() {
-        super();
-        this.onKeyUp = this.onKeyUp.bind(this);
-    }
+  hasSelectInputTarget() {
+    return false;
+  }
 
-    hasSelectInputTarget() {
-        return false;
-    }
+  setAutocompleteInput() {
+    this.autocompleteInput = this.getElement();
+  }
 
-    setAutocompleteInput() {
-        this.autocompleteInput = this.getElement();
-    }
+  transform() {
+    this.setAutocompleteInput();
+    let originalInputStyle = this.getStyleScrapper().getElementComputedStyle(
+      this.autocompleteInput
+    );
+    this.awesomplete = new Awesomplete(this.autocompleteInput, {
+      list: this.values,
+    });
+    this.getStyleScrapper().updateElementStyle(
+      this.autocompleteInput,
+      originalInputStyle
+    );
+    this.autocompleteInput.addEventListener('keyup', this.onKeyUp);
+  }
 
-    transform() {
-        this.setAutocompleteInput();
-        let originalInputStyle = this.getStyleScrapper().getElementComputedStyle(this.autocompleteInput);
-        this.awesomplete = new Awesomplete(this.autocompleteInput, {list: this.values});
-        this.getStyleScrapper().updateElementStyle(this.autocompleteInput, originalInputStyle);
-        this.autocompleteInput.addEventListener("keyup", this.onKeyUp);
-    }
+  onKeyUp() {
+    this.applyStyles(
+      this.getHighlightedElements(),
+      this.getStyle().highlightedElements
+    );
+  }
 
-    onKeyUp() {
-        this.applyStyles(this.getHighlightedElements(), this.getStyle().highlightedElements);
-    }
+  checkPreconditions() {
+    return super.checkPreconditions() && this.values && this.values.length > 0;
+  }
 
-    checkPreconditions() {
-        return super.checkPreconditions() && this.values && this.values.length > 0;
-    }
+  unDo() {
+    this.autocompleteInput.removeEventListener('keyup', this.onKeyUp);
+    this.awesomplete.destroy();
+  }
 
-    unDo() {
-        this.autocompleteInput.removeEventListener("keyup", this.onKeyUp);
-        this.awesomplete.destroy();
-    }
+  setValues(aList) {
+    this.values = aList;
+  }
 
-    setValues(aList) {
-        this.values = aList;
-    }
+  getValues() {
+    return this.values;
+  }
 
-    getValues() {
-        return this.values;
-    }
+  getView() {
+    return TurnInputIntoRadiosView;
+  }
 
-    getView() {
-        return TurnInputIntoRadiosView;
-    }
+  static asString() {
+    return 'Add Autocomplete';
+  }
 
-    static asString() {
-        return "Add Autocomplete";
-    }
+  targetElements() {
+    return "input[type='text']";
+  }
 
-    targetElements() {
-        return "input[type='text']";
-    }
+  getAutocompleteList() {
+    return document.querySelectorAll(
+      '#' + this.autocompleteInput.getAttribute('aria-owns')
+    );
+  }
 
+  getAutocompleteListElements() {
+    return this.getAutocompleteList()[0].querySelectorAll('li');
+  }
 
-    getAutocompleteList() {
-        return document.querySelectorAll("#" + this.autocompleteInput.getAttribute("aria-owns"));
-    }
+  getHighlightedElements() {
+    return this.getAutocompleteList()[0].querySelectorAll('mark');
+  }
 
-    getAutocompleteListElements() {
-        return this.getAutocompleteList()[0].querySelectorAll("li");
-    }
+  getStyledElementsQty() {
+    return 1;
+  }
 
-    getHighlightedElements() {
-        return this.getAutocompleteList()[0].querySelectorAll("mark");
-    }
+  assignStyle(styles) {
+    this.getStyle()['highlightedElements'] = styles[0];
+  }
 
-    getStyledElementsQty () {
-        return  1;
-    }
+  clone() {
+    let clonedRefactoring = super.clone();
+    clonedRefactoring.setValues(this.getValues());
+    return clonedRefactoring;
+  }
 
-    assignStyle(styles) {
-        this.getStyle()["highlightedElements"] = styles[0];
-    }
+  serialize() {
+    let json = super.serialize();
+    json.values = this.getValues();
+    return json;
+  }
 
-    clone() {
-        let clonedRefactoring = super.clone();
-        clonedRefactoring.setValues(this.getValues());
-        return clonedRefactoring;
-    }
+  static getPreviewer() {
+    return new AddAutocompletePreviewer();
+  }
 
-    serialize() {
-        let json = super.serialize();
-        json.values = this.getValues();
-        return json;
-    }
+  static getClassName() {
+    return 'AddAutocompleteRefactoring';
+  }
 
-    static getPreviewer() {
-        return new AddAutocompletePreviewer();
-    }
+  getDescription() {
+    return 'Possible values to an input are suggested automatically when users complete it';
+  }
 
-    static getClassName() {
-        return "AddAutocompleteRefactoring";
-    }
-
-    getDescription() {
-        return "Possible values to an input are suggested automatically when users complete it";
-    }
-
-    getDemoResources() {
-        return ["AddAutocompleteRefactoringBefore.gif", "AddAutocompleteRefactoringAfter.gif"];
-    }
-};
+  getDemoResources() {
+    return [
+      'AddAutocompleteRefactoringBefore.gif',
+      'AddAutocompleteRefactoringAfter.gif',
+    ];
+  }
+}
 
 export default AddAutocompleteRefactoring;
-
