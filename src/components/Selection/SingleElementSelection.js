@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
-import PageSelector from './PageSelector';
+import React, { useState, useEffect } from 'react';
 import XPathInterpreter from '../../utils/XPathInterpreter';
 import ElementSelectionGif from './ElementSelectionGif';
 import style from './SingleElementSelection.css';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
+import { usePageSelector } from '../../context/PageSelectorContext';
 
 export const SingleElementSelection = ({ refactoringApplication }) => {
   const refactoring = refactoringApplication.refactoring;
+
+  const pageSelector = usePageSelector();
 
   const [errorInSelection, setErrorInSelection] = useState(false);
   const [elementSelected, setElementSelected] = useState(
     refactoring.getElement() !== null
   );
+
+  useEffect(() => {
+    if (refactoring.getElement()) {
+      pageSelector.addSelectionClass(
+        refactoring.getElement(),
+        pageSelector.selectionClass
+      );
+    }
+    pageSelector.enableElementSelection({
+      targetElementSelector: refactoring.targetElements(),
+      onElementSelection: onElementSelection,
+    });
+    pageSelector.preventDomElementsBehaviour();
+  }, []);
 
   const onElementSelection = (elementSelected) => {
     if (refactoring.getElement()) {
@@ -34,13 +50,6 @@ export const SingleElementSelection = ({ refactoringApplication }) => {
     );
   };
 
-  const pageSelector = new PageSelector();
-  pageSelector.enableElementSelection({
-    targetElementSelector: refactoring.targetElements(),
-    onElementSelection: onElementSelection,
-  });
-  pageSelector.preventDomElementsBehaviour();
-
   const disableElementSelection = () =>
     pageSelector.restoreDomElementsBehaviour();
 
@@ -51,11 +60,7 @@ export const SingleElementSelection = ({ refactoringApplication }) => {
   };
 
   const next = () => {
-    if (elementSelected) {
-      disableElementSelection();
-    } else {
-      setErrorInSelection(true);
-    }
+    elementSelected ? disableElementSelection() : setErrorInSelection(true);
     return elementSelected;
   };
 
