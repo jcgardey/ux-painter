@@ -49,9 +49,9 @@ export const SecondaryButton = ({ to, props, children, onClick }) => {
   );
 };
 
-export const AddButton = ({ to, props, children }) => {
+export const AddButton = ({ to, props, children, onClick }) => {
   return (
-    <Button className={buttonStyle.add} to={to} props={props}>
+    <Button className={buttonStyle.add} to={to} props={props} onClick={onClick}>
       {children}
     </Button>
   );

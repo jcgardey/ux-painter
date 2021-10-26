@@ -48,7 +48,6 @@ export const RefactoringApplicationSteps = ({
   };
 
   const back = () => {
-    console.log('back', onBack);
     if (onBack === undefined || onBack()) {
       refactoringApplication.goBack();
       router.show(refactoringApplication.currentStep().view, {
@@ -79,9 +78,12 @@ export const RefactoringApplicationSteps = ({
         <SecondaryButton onClick={back}>
           <i className="fas fa-arrow-circle-left"></i> Back
         </SecondaryButton>
-        <PrimaryButton onClick={next}>
-          Next <i className="fas fa-arrow-circle-right"></i>
-        </PrimaryButton>
+        {refactoringApplication.next() !==
+          refactoringApplication.currentStep() && (
+          <PrimaryButton onClick={next}>
+            Next <i className="fas fa-arrow-circle-right"></i>
+          </PrimaryButton>
+        )}
       </Controls>
     </div>
   );
