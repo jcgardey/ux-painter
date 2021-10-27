@@ -1,13 +1,32 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
-import Awesomplete from 'awesomplete/awesomplete';
-import 'awesomplete/awesomplete.css';
-import TurnInputIntoRadiosView from '../components/TurnInputIntoRadiosView';
-import AddAutocompletePreviewer from '../previewers/AddAutocompletePreviewer';
 
 class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
+  style = {
+    listContainer: {
+      padding: '0.4em',
+      border: '1px solid grey',
+      borderRadius: '5px',
+      backgroundColor: 'white',
+    },
+    itemContainer: {
+      margin: '0.5em 0.2em',
+      padding: '0.2em 0.6em',
+    },
+    itemContainerHovered: {
+      cursor: 'pointer',
+      backgroundColor: 'black',
+      color: 'white',
+    },
+    itemContainerNotHovered: {
+      cursor: 'default',
+      backgroundColor: 'white',
+      color: 'black',
+    },
+  };
+
   constructor() {
     super();
-    this.onKeyUp = this.onKeyUp.bind(this);
+    this.showSuggestedValues = this.showSuggestedValues.bind(this);
     this.values = [];
   }
 
@@ -19,35 +38,73 @@ class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
     this.autocompleteInput = this.getElement();
   }
 
-  transform() {
-    this.setAutocompleteInput();
-    let originalInputStyle = this.getStyleScrapper().getElementComputedStyle(
-      this.autocompleteInput
-    );
-    this.awesomplete = new Awesomplete(this.autocompleteInput, {
-      list: this.values,
+  createListContainer() {
+    let container = document.createElement('div');
+    container.style.position = 'absolute';
+    container.style.zIndex = 9999;
+    container.style.width = window
+      .getComputedStyle(this.getElement())
+      .getPropertyValue('width');
+    container.style.display = 'none';
+    this.applyStyles(container, this.style.listContainer);
+    return container;
+  }
+
+  createListItem(itemName) {
+    let itemContainer = document.createElement('div');
+    itemContainer.width = '100%';
+    let item = document.createElement('span');
+    item.textContent = itemName;
+    itemContainer.appendChild(item);
+
+    this.applyStyles(itemContainer, this.style.itemContainer);
+    itemContainer.addEventListener('mouseenter', (e) => {
+      this.applyStyles(itemContainer, this.style.itemContainerHovered);
     });
-    this.getStyleScrapper().updateElementStyle(
-      this.autocompleteInput,
-      originalInputStyle
-    );
-    this.autocompleteInput.addEventListener('keyup', this.onKeyUp);
+    itemContainer.addEventListener('mouseleave', (e) => {
+      this.applyStyles(itemContainer, this.style.itemContainerNotHovered);
+    });
+
+    itemContainer.addEventListener('click', (e) => {
+      this.getElement().value =
+        e.currentTarget.querySelector('span').textContent;
+      this.container.style.display = 'none';
+    });
+    return itemContainer;
   }
 
-  onKeyUp() {
-    this.applyStyles(
-      this.getHighlightedElements(),
-      this.getStyle().highlightedElements
-    );
+  transform() {
+    this.container = this.createListContainer();
+    this.getElement().nextElementSibling !== null
+      ? this.getElement().parentNode.insertBefore(
+          this.getElement().nextElementSibling,
+          this.container
+        )
+      : this.getElement().parentNode.appendChild(this.container);
+
+    this.getElement().addEventListener('keyup', this.showSuggestedValues);
   }
 
-  checkPreconditions() {
-    return super.checkPreconditions() && this.values && this.values.length > 0;
+  showSuggestedValues(event) {
+    this.container.innerHTML = '';
+    const matchingValues = this.values
+      .filter((value) => value.includes(event.target.value))
+      .map((value) => this.createListItem(value));
+    if (matchingValues.length > 0 && event.target.value !== '') {
+      matchingValues.forEach((item) => this.container.appendChild(item));
+      this.container.style.display = 'block';
+    } else {
+      this.container.style.display = 'none';
+    }
+  }
+
+  isApplicable() {
+    return super.isApplicable() && this.values && this.values.length > 0;
   }
 
   unDo() {
-    this.autocompleteInput.removeEventListener('keyup', this.onKeyUp);
-    this.awesomplete.destroy();
+    this.getElement().removeEventListener('keyup', this.showSuggestedValues);
+    this.getElement().parentNode.removeChild(this.container);
   }
 
   setValues(aList) {
@@ -58,38 +115,12 @@ class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
     return this.values;
   }
 
-  getView() {
-    return TurnInputIntoRadiosView;
-  }
-
   static asString() {
     return 'Add Autocomplete';
   }
 
   targetElements() {
     return "input[type='text']";
-  }
-
-  getAutocompleteList() {
-    return document.querySelectorAll(
-      '#' + this.autocompleteInput.getAttribute('aria-owns')
-    );
-  }
-
-  getAutocompleteListElements() {
-    return this.getAutocompleteList()[0].querySelectorAll('li');
-  }
-
-  getHighlightedElements() {
-    return this.getAutocompleteList()[0].querySelectorAll('mark');
-  }
-
-  getStyledElementsQty() {
-    return 1;
-  }
-
-  assignStyle(styles) {
-    this.getStyle()['highlightedElements'] = styles[0];
   }
 
   clone() {
@@ -104,23 +135,8 @@ class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
     return json;
   }
 
-  static getPreviewer() {
-    return new AddAutocompletePreviewer();
-  }
-
-  static getClassName() {
-    return 'AddAutocompleteRefactoring';
-  }
-
   getDescription() {
     return 'Possible values to an input are suggested automatically when users complete it';
-  }
-
-  getDemoResources() {
-    return [
-      'AddAutocompleteRefactoringBefore.gif',
-      'AddAutocompleteRefactoringAfter.gif',
-    ];
   }
 }
 
