@@ -1,28 +1,32 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
-  style = {
-    listContainer: {
-      padding: '0.4em',
-      border: '1px solid grey',
-      borderRadius: '5px',
-      backgroundColor: 'white',
+  style = [
+    {
+      name: 'List Container',
+      properties: {
+        padding: '0.4em',
+        border: '1px solid grey',
+        borderRadius: '5px',
+        backgroundColor: 'white',
+      },
     },
-    itemContainer: {
-      margin: '0.5em 0.2em',
-      padding: '0.2em 0.6em',
+    {
+      name: 'List Item',
+      properties: {
+        margin: '0.5em 0.2em',
+        padding: '0.2em 0.6em',
+      },
     },
-    itemContainerHovered: {
-      cursor: 'pointer',
-      backgroundColor: 'black',
-      color: 'white',
+    {
+      name: 'List Item Hovered',
+      properties: {
+        cursor: 'pointer',
+        backgroundColor: 'black',
+        color: 'white',
+      },
     },
-    itemContainerNotHovered: {
-      cursor: 'default',
-      backgroundColor: 'white',
-      color: 'black',
-    },
-  };
+  ];
 
   constructor() {
     super();
@@ -46,7 +50,7 @@ class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
       .getComputedStyle(this.getElement())
       .getPropertyValue('width');
     container.style.display = 'none';
-    this.applyStyles(container, this.style.listContainer);
+    this.applyStyle(container, 'List Container');
     return container;
   }
 
@@ -57,12 +61,12 @@ class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
     item.textContent = itemName;
     itemContainer.appendChild(item);
 
-    this.applyStyles(itemContainer, this.style.itemContainer);
+    this.applyStyle(itemContainer, 'List Item');
     itemContainer.addEventListener('mouseenter', (e) => {
-      this.applyStyles(itemContainer, this.style.itemContainerHovered);
+      this.applyStyle(itemContainer, 'List Item Hovered');
     });
     itemContainer.addEventListener('mouseleave', (e) => {
-      this.applyStyles(itemContainer, this.style.itemContainerNotHovered);
+      this.removeStyle(itemContainer, 'List Item Hovered');
     });
 
     itemContainer.addEventListener('click', (e) => {

@@ -4,6 +4,7 @@ import { AddButton, Controls, PrimaryButton } from '../Button/Button';
 import { useRefactoringManager } from '../../hooks/useRefactoringManager';
 import { REFACTORING_CATALOGUE, VERSION_LIST } from '../../routing/types';
 import { usePageSelector } from '../../context/PageSelectorContext';
+import { RefactoringStyle } from './RefactoringStyle';
 
 const RefactoringPreview = ({ refactoringApplication }) => {
   const refactoring = refactoringApplication.refactoring;
@@ -32,6 +33,7 @@ const RefactoringPreview = ({ refactoringApplication }) => {
       refactoringApplication={refactoringApplication}
       onBack={back}
     >
+      <RefactoringStyle refactoring={refactoring} />
       <Controls>
         <PrimaryButton onClick={back} to={REFACTORING_CATALOGUE}>
           Cancel <i className="fas fa-times-circle"></i>

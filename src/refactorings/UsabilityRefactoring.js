@@ -25,7 +25,7 @@ class UsabilityRefactoring {
     return {
       refactoring: this.constructor.name,
       url: this.getURL(),
-      style: this.getStyle(),
+      style: this.style,
     };
   }
 
@@ -60,9 +60,21 @@ class UsabilityRefactoring {
     });
   }
 
-  applyStyles(element, styleObject) {
-    for (var property in styleObject)
-      element.style[property] = styleObject[property];
+  getStyleGroupWithName(styleGroupName) {
+    return this.style.filter(
+      (elementStyle) => elementStyle.name === styleGroupName
+    )[0].properties;
+  }
+
+  applyStyle(element, styleGroupName) {
+    for (var property in this.getStyleGroupWithName(styleGroupName))
+      element.style[property] =
+        this.getStyleGroupWithName(styleGroupName)[property];
+  }
+
+  removeStyle(element, styleGroupName) {
+    for (var property in this.getStyleGroupWithName(styleGroupName))
+      element.style[property] = '';
   }
 
   static fromJSON(json) {

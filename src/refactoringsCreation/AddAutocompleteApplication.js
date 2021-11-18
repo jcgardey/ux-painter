@@ -1,6 +1,6 @@
 import {
-  ADD_AUTOCOMPLETE_SUGGESTED_VALUES,
   REFACTORING_PREVIEW,
+  ADD_AUTOCOMPLETE_SUGGESTED_VALUES,
   SINGLE_ELEMENT_SELECTION,
 } from '../routing/types';
 import RefactoringApplication from './RefactoringApplication';

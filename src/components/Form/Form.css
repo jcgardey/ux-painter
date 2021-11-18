@@ -18,3 +18,23 @@
     font-size: 1.2em;
     color: grey;
 }
+
+.inline {
+    display: flex;
+    align-items: center;
+    margin: 0.5em;
+}
+
+.inlineLabel {
+    width: 40%;
+}
+
+.inlineInput {
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+    height: 2em;
+    padding: 0 10px;
+    width: 40%;
+    font-size: 1.1em;
+    box-sizing: border-box;
+}

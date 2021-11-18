@@ -24,3 +24,20 @@ export const Input = ({
     onChange={onChange}
   />
 );
+
+export const InlineFormField = ({ children }) => (
+  <div className={formStyle.inline}>{children}</div>
+);
+
+export const InlineInput = ({ type = 'text', placeholder = '', ...props }) => (
+  <input
+    type={type}
+    className={formStyle.inlineInput}
+    placeholder={placeholder}
+    {...props}
+  />
+);
+
+export const InlineLabel = ({ children }) => (
+  <label className={formStyle.inlineLabel}>{children}</label>
+);
