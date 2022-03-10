@@ -3,7 +3,7 @@ import React from 'react';
 import Frame from 'react-frame-component';
 import { Router } from '../../routing/Router';
 import WindowControl from '../WindowControl';
-import mainStyle from './Main.css';
+import mainStyle from './Main.module.css';
 
 const Main = () => {
   return (

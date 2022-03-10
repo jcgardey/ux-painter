@@ -7,7 +7,7 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from '../Button/Button';
-import editVersionStyle from './EditVersion.css';
+import editVersionStyle from './EditVersion.module.css';
 
 const AppliedRefactoring = ({ refactoring }) => (
   <p>{refactoring.constructor.asString()}</p>

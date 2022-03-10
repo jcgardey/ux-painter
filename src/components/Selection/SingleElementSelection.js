@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import XPathInterpreter from '../../utils/XPathInterpreter';
 import ElementSelectionGif from './ElementSelectionGif';
-import style from './SingleElementSelection.css';
+import style from './SingleElementSelection.module.css';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
 import { usePageSelector } from '../../context/PageSelectorContext';
 

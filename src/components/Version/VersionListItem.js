@@ -2,7 +2,7 @@ import React from 'react';
 import { useRefactoringManager } from '../../hooks/useRefactoringManager';
 import { Button } from '../Button/Button';
 import { EDIT_VERSION, VERSION } from '../../routing/types';
-import versionStyle from './VersionListItem.css';
+import versionStyle from './VersionListItem.module.css';
 
 export const VersionListItem = ({ version, current, switchToVersion }) => {
   const manager = useRefactoringManager();

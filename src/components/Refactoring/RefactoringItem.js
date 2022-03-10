@@ -1,7 +1,7 @@
 import React from 'react';
 import { locateRefactoringApplication } from '../../refactoringsCreation/refactoringApplicationLocator';
 import { Link } from '../Button/Button';
-import itemStyle from './RefactoringItem.css';
+import itemStyle from './RefactoringItem.module.css';
 
 export const RefactoringItem = ({ refactoringClass }) => {
   const refactoringApplication = new (locateRefactoringApplication(

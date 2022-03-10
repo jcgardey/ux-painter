@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './RefactoringApplicationSteps.css';
+import style from './RefactoringApplicationSteps.module.css';
 import { Controls, PrimaryButton, SecondaryButton } from '../Button/Button';
 import { useRouter } from '../../routing/Router';
 

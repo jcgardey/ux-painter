@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import style from './RefactoringStyle.css';
+import style from './RefactoringStyle.module.css';
 import { InlineFormField, InlineLabel, InlineInput } from '../Form/Form';
 
 const Icon = ({ className }) => (

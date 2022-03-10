@@ -1,5 +1,5 @@
 import React from 'react';
-import formStyle from './Form.css';
+import formStyle from './Form.module.css';
 
 export const FormField = ({ children }) => (
   <div className={formStyle.group}>{children}</div>

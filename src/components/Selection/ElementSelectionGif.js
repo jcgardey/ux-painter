@@ -1,7 +1,7 @@
 /*global chrome*/
 
 import React from 'react';
-import elementSelectionGifStyle from './ElementSelectionGif.css';
+import elementSelectionGifStyle from './ElementSelectionGif.module.css';
 
 const ElementSelectionGif = () => (
   <img

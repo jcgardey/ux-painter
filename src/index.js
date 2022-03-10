@@ -3,7 +3,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import Main from './components/Main/Main';
-import style from './index.css';
+import style from './index.module.css';
 import './content.css';
 import RefactoringManager from './storage/RefactoringManager';
 

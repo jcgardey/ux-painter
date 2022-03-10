@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from '../../routing/Router';
-import buttonStyle from './Button.css';
+import buttonStyle from './Button.module.css';
 
 export const Button = ({
   to,
