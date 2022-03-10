@@ -26,7 +26,10 @@ const RefactoringPreview = ({ refactoringApplication }) => {
 
   const manager = useRefactoringManager();
 
-  const refactor = () => manager.addDirtyRefactoring(refactoring);
+  const refactor = () => {
+    refactoring.setURL(document.location.href);
+    manager.addDirtyRefactoring(refactoring);
+  };
 
   return (
     <RefactoringApplicationSteps
