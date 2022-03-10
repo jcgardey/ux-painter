@@ -10,17 +10,11 @@ import {
 import editVersionStyle from './EditVersion.css';
 
 const AppliedRefactoring = ({ refactoring }) => (
-  <div className={'row col-12'}>
-    <p>{refactoring.constructor.asString()}</p>
-  </div>
+  <p>{refactoring.constructor.asString()}</p>
 );
 
 const DirtyRefactoring = ({ refactoring }) => (
-  <div className={'row col-12'}>
-    <p className={'uxpainter-message'}>
-      {dirtyRefactoring.constructor.asString()}*
-    </p>
-  </div>
+  <p>{refactoring.constructor.asString()}*</p>
 );
 
 const EditVersion = () => {
@@ -42,7 +36,7 @@ const EditVersion = () => {
             <AppliedRefactoring refactoring={refactoring} />
           ))}
         {manager.getDirtyRefactorings().map((dirtyRefactoring) => (
-          <DirtyRefactoring refactoring={refactoring} />
+          <DirtyRefactoring refactoring={dirtyRefactoring} />
         ))}
         {manager.getCurrentVersion().getRefactorings().length == 0 &&
           manager.getDirtyRefactorings().length == 0 && (

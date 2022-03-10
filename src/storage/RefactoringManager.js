@@ -78,7 +78,7 @@ class RefactoringManager {
 
   getRefactoringClass(aString) {
     let classes = this.getRefactoringCatalogue().filter(function (classObject) {
-      return classObject.getClassName() == aString;
+      return classObject.name === aString;
     });
     return classes ? classes[0] : null;
   }
