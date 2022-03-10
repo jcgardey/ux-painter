@@ -33,7 +33,6 @@ const RefactoringPreview = ({ refactoringApplication }) => {
       refactoringApplication={refactoringApplication}
       onBack={back}
     >
-      <RefactoringStyle refactoring={refactoring} />
       <Controls>
         <PrimaryButton onClick={back} to={REFACTORING_CATALOGUE}>
           Cancel <i className="fas fa-times-circle"></i>
