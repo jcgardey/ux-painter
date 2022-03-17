@@ -8,3 +8,5 @@ export const REFACTORING_PREVIEW = 'refactoring_preview';
 
 export const ADD_AUTOCOMPLETE_SUGGESTED_VALUES =
   'add_autocomplete_suggested_values';
+
+export const RENAME_ELEMENT = 'rename_element'

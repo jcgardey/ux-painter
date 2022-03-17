@@ -8,12 +8,14 @@ import {
   SINGLE_ELEMENT_SELECTION,
   VERSION,
   VERSION_LIST,
+  RENAME_ELEMENT
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
 import { SingleElementSelection } from '../components/Selection/SingleElementSelection';
 import { AddAutocompleteSuggestedValues } from '../components/AddAutocomplete/AddAutocompleteSuggestedValues';
 import RefactoringPreview from '../components/RefactoringPreview/RefactoringPreview';
+import { RenameElement } from '../components/RenameElement/RenameElement';
 
 export default [
   {
@@ -43,5 +45,9 @@ export default [
   {
     name: ADD_AUTOCOMPLETE_SUGGESTED_VALUES,
     Component: AddAutocompleteSuggestedValues,
+  },
+  {
+    name: RENAME_ELEMENT,
+    Component: RenameElement,
   },
 ];
