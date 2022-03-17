@@ -6,7 +6,7 @@ import itemStyle from './RefactoringItem.module.css';
 export const RefactoringItem = ({ refactoringClass }) => {
   const refactoringApplication = new (locateRefactoringApplication(
     refactoringClass.name
-  ))(new refactoringClass());
+  ))(new refactoringClass);
 
   return (
     <Link
