@@ -16,7 +16,7 @@ class RenameElementApplication extends RefactoringApplication {
       view: RENAME_ELEMENT,
     },
     {
-      title: 'Add Autocomplete Preview',
+      title: 'Rename Element Preview',
       view: REFACTORING_PREVIEW,
     },
   ];
