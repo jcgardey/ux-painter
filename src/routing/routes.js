@@ -10,7 +10,8 @@ import {
   VERSION_LIST,
   RENAME_ELEMENT,
   TURN_ATTRIBUTE_INTO_LINK,
-  ADD_LINK
+  ADD_LINK,
+  ADD_TOOLTIP
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -20,6 +21,7 @@ import RefactoringPreview from '../components/RefactoringPreview/RefactoringPrev
 import { RenameElement } from '../components/RenameElement/RenameElement';
 import { TurnAttributeIntoLink } from '../components/TurnAttributeIntoLink/TurnAttributeIntoLink';
 import { AddLink } from '../components/AddLink/AddLink';
+import { AddTooltip } from '../components/AddTooltip/AddTooltip';
 
 export default [
   {
@@ -61,5 +63,9 @@ export default [
   {
     name: ADD_LINK,
     Component: AddLink,
+  },
+  {
+    name: ADD_TOOLTIP,
+    Component: AddTooltip,
   }
 ];
