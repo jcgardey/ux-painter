@@ -2,6 +2,7 @@ import RefactoringStorage from './RefactoringStorage';
 import AddAutocompleteRefactoring from '../refactorings/AddAutocompleteRefactoring';
 import AddDatePickerRefactoring from '../refactorings/AddDatePickerRefactoring';
 import RenameElementRefactoring from '../refactorings/RenameElementRefactoring';
+import TurnAttributeIntoLinkRefactoring from '../refactorings/TurnAttributeIntoLinkRefactoring';
 
 class RefactoringManager {
   constructor() {
@@ -70,7 +71,8 @@ class RefactoringManager {
     return [
       AddAutocompleteRefactoring,
       AddDatePickerRefactoring,
-      RenameElementRefactoring
+      RenameElementRefactoring,
+      TurnAttributeIntoLinkRefactoring
       
       /*AddFormValidationRefactoring, AddInlineFormValidationRefactoring,
             AddLinkRefactoring,AddProcessingPageRefactoring, AddTooltipRefactoring, DateInputIntoSelectsRefactoring, DistributeMenuRefactoring, FormatInputRefactoring, LinkToTopRefactoring, RenameElementRefactoring,

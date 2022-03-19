@@ -8,7 +8,8 @@ import {
   SINGLE_ELEMENT_SELECTION,
   VERSION,
   VERSION_LIST,
-  RENAME_ELEMENT
+  RENAME_ELEMENT,
+  TURN_ATTRIBUTE_INTO_LINK
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -16,6 +17,7 @@ import { SingleElementSelection } from '../components/Selection/SingleElementSel
 import { AddAutocompleteSuggestedValues } from '../components/AddAutocomplete/AddAutocompleteSuggestedValues';
 import RefactoringPreview from '../components/RefactoringPreview/RefactoringPreview';
 import { RenameElement } from '../components/RenameElement/RenameElement';
+import { TurnAttributeIntoLink } from '../components/TurnAttributeIntoLink/TurnAttributeIntoLink';
 
 export default [
   {
@@ -50,4 +52,8 @@ export default [
     name: RENAME_ELEMENT,
     Component: RenameElement,
   },
+  {
+    name: TURN_ATTRIBUTE_INTO_LINK,
+    Component: TurnAttributeIntoLink,
+  }
 ];

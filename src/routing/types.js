@@ -10,3 +10,5 @@ export const ADD_AUTOCOMPLETE_SUGGESTED_VALUES =
   'add_autocomplete_suggested_values';
 
 export const RENAME_ELEMENT = 'rename_element'
+
+export const TURN_ATTRIBUTE_INTO_LINK = 'turn_attribute_into_link'
