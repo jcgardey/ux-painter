@@ -9,7 +9,8 @@ import {
   VERSION,
   VERSION_LIST,
   RENAME_ELEMENT,
-  TURN_ATTRIBUTE_INTO_LINK
+  TURN_ATTRIBUTE_INTO_LINK,
+  ADD_LINK
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -18,6 +19,7 @@ import { AddAutocompleteSuggestedValues } from '../components/AddAutocomplete/Ad
 import RefactoringPreview from '../components/RefactoringPreview/RefactoringPreview';
 import { RenameElement } from '../components/RenameElement/RenameElement';
 import { TurnAttributeIntoLink } from '../components/TurnAttributeIntoLink/TurnAttributeIntoLink';
+import { AddLink } from '../components/AddLink/AddLink';
 
 export default [
   {
@@ -55,5 +57,9 @@ export default [
   {
     name: TURN_ATTRIBUTE_INTO_LINK,
     Component: TurnAttributeIntoLink,
+  },
+  {
+    name: ADD_LINK,
+    Component: AddLink,
   }
 ];
