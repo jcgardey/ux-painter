@@ -27,14 +27,6 @@ class LinkToTopRefactoring extends UsabilityRefactoring {
     window.removeEventListener("scroll", this.onScroll);
   }
 
-  setElement(anElement) {
-    this.element = anElement;
-  }
-
-  getElement() {
-    return this.element;
-  }
-
   onScroll() {
     if ($(window).scrollTop() > 0) {
       $(this.link).fadeIn();

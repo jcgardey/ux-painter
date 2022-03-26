@@ -11,4 +11,3 @@ export const RENAME_ELEMENT = 'rename_element';
 export const TURN_ATTRIBUTE_INTO_LINK = 'turn_attribute_into_link';
 export const ADD_LINK = 'add_link';
 export const ADD_TOOLTIP = 'add_tooltip';
-export const LINK_TO_TOP = 'link_to_top';
