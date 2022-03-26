@@ -12,10 +12,12 @@ const RefactoringPreview = ({ refactoringApplication }) => {
   const pageSelector = usePageSelector();
 
   useEffect(() => {
-    pageSelector.removeSelectionClass(
-      refactoring.getElement(),
-      pageSelector.selectionClass
-    );
+    if (refactoring.getElement) {
+      pageSelector.removeSelectionClass(
+        refactoring.getElement(),
+        pageSelector.selectionClass
+      );
+    };
     refactoring.execute();
   }, []);
 
