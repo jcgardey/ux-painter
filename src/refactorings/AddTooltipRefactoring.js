@@ -1,18 +1,54 @@
 import UsabilityRefactoringOnElement from "./UsabilityRefactoringOnElement";
-import 'tipr/tipr/tipr.css';
-const $ = require('jquery');
-window.jQuery = $;
-global.jQuery = $;
-require('tipr');
 
 class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
+
+  style = [
+    {
+      name: 'Mouse enter',
+      properties: {
+        color: 'black',
+        backgroundColor: 'white',
+        display: 'block'
+      }
+    },
+    {
+      name: 'Mouse leave',
+      properties: {
+        display: 'none'
+      }
+    }
+  ];
 
   transform() {
     this.originalElement = this.getElement().cloneNode(true);
     this.getElement().className += " tip";
     this.getElement().setAttribute("data-tip", this.tooltipName);
 
-    $(this.getElement()).tipr();
+    let container = document.createElement('div');
+    container.style.position = 'absolute';
+    container.style.zIndex = 9999;
+    container.style.paddingTop = '10px';
+    container.style.paddingBottom = '10px';
+    container.style.paddingRight = '17px';
+    container.style.paddingLeft = '17px';
+    container.style.display = 'none';
+    container.innerHTML = this.tooltipName;
+
+    let container2 = document.createElement('div');
+    container2.style.display = 'flex';
+    container2.style.justifyContent = 'center';
+
+    container2.appendChild(container);
+
+    this.getElement().appendChild(container2);
+
+    this.getElement().addEventListener('mouseenter', (e) => {
+      this.applyStyle(container, 'Mouse enter');
+    });
+    this.getElement().addEventListener('mouseleave', (e) => {
+      this.applyStyle(container, 'Mouse leave');
+    });
+
     // const me = this;
     // this.getElement().addEventListener("mousemove", function () {
     //   me.applyStyles(me.getTooltipElement(), me.getStyle().tooltip);
