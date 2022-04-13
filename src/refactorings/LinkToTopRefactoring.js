@@ -1,7 +1,5 @@
 import UsabilityRefactoring from "./UsabilityRefactoring";
 
-const $ = require('jquery');
-
 class LinkToTopRefactoring extends UsabilityRefactoring {
 
   constructor() {
@@ -14,7 +12,9 @@ class LinkToTopRefactoring extends UsabilityRefactoring {
     this.link = document.createElement("a");
     document.body.appendChild(this.link);
     this.link.style.cssText = "display:block;position:fixed;bottom:30px;right:30px;width:35px;height:35px;cursor:pointer;background: url(https://selfrefactoring.s3.amazonaws.com/resources/refactorings/totop.png) no-repeat;display:none";
-    window.addEventListener("scroll", this.onScroll);
+    this.link.style.opacity = 0;
+    this.link.style.display = 'flex';
+    window.addEventListener("scroll", this.onScroll(this.link));
     this.link.addEventListener("click", this.onClick);
   }
 
@@ -27,17 +27,21 @@ class LinkToTopRefactoring extends UsabilityRefactoring {
     window.removeEventListener("scroll", this.onScroll);
   }
 
-  onScroll() {
-    if ($(window).scrollTop() > 0) {
-      $(this.link).fadeIn();
-    }
-    else {
-      $(this.link).fadeOut();
-    }
+  onScroll(button) {
+    window.onscroll = function() {
+      if (document.documentElement.scrollTop > 0) {
+        button.style.opacity = 1;
+        button.style.transition = 'opacity 0.75s';
+      }
+      else {
+        button.style.opacity = 0;
+        button.style.transition = 'opacity 0.75s';
+      }
+    };
   }
 
   onClick() {
-    $('body,html').animate({ scrollTop: 0 }, 400);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return false;
   }
 
