@@ -81,8 +81,8 @@ class AddAutocompleteRefactoring extends UsabilityRefactoringOnElement {
     this.container = this.createListContainer();
     this.getElement().nextElementSibling !== null
       ? this.getElement().parentNode.insertBefore(
-          this.getElement().nextElementSibling,
-          this.container
+          this.container,
+          this.getElement().nextElementSibling
         )
       : this.getElement().parentNode.appendChild(this.container);
 
