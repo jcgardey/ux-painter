@@ -1,28 +1,27 @@
-import UsabilityRefactoringOnElement from "./UsabilityRefactoringOnElement";
+import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
-
   style = [
     {
       name: 'Mouse enter',
       properties: {
         color: 'black',
         backgroundColor: 'white',
-        display: 'block'
-      }
+        display: 'block',
+      },
     },
     {
       name: 'Mouse leave',
       properties: {
-        display: 'none'
-      }
-    }
+        display: 'none',
+      },
+    },
   ];
 
   transform() {
     this.originalElement = this.getElement().cloneNode(true);
-    this.getElement().className += " tip";
-    this.getElement().setAttribute("data-tip", this.tooltipName);
+    this.getElement().className += ' tip';
+    this.getElement().setAttribute('data-tip', this.tooltipName);
 
     let container = document.createElement('div');
     container.style.position = 'absolute';
@@ -60,7 +59,10 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
   }
 
   unDo() {
-    this.getElement().parentNode.replaceChild(this.originalElement, this.getElement());
+    this.getElement().parentNode.replaceChild(
+      this.originalElement,
+      this.getElement()
+    );
     this.setElement(null);
   }
 
@@ -73,7 +75,7 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
   }
 
   targetElements() {
-    return "a, div, img, input, span, p, button";
+    return 'a, div, img, input, span, p, button';
   }
 
   serialize() {
@@ -83,11 +85,11 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
   }
 
   static asString() {
-    return "Add Tooltip";
+    return 'Add Tooltip';
   }
 
   getDescription() {
-    return "Add an instant tooltip to an element to make clear its purpose";
+    return 'Add an instant tooltip to an element to make clear its purpose';
   }
 }
 

@@ -1,13 +1,12 @@
-import UsabilityRefactoringOnElement from "./UsabilityRefactoringOnElement";
+import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class AddLinkRefactoring extends UsabilityRefactoringOnElement {
-
   constructor() {
     super();
   }
 
   transform() {
-    this.linkElement = document.createElement("a");
+    this.linkElement = document.createElement('a');
     this.linkElement.textContent = this.getLinkName();
     this.linkElement.href = this.getTargetURL();
     this.getElement().appendChild(this.linkElement);
@@ -15,7 +14,9 @@ class AddLinkRefactoring extends UsabilityRefactoringOnElement {
   }
 
   checkPreconditions() {
-    return super.checkPreconditions() && this.getLinkName() && this.getTargetURL();
+    return (
+      super.checkPreconditions() && this.getLinkName() && this.getTargetURL()
+    );
   }
 
   unDo() {
@@ -39,7 +40,7 @@ class AddLinkRefactoring extends UsabilityRefactoringOnElement {
   }
 
   targetElements() {
-    return "div, ul, nav, section, header";
+    return 'div, ul, nav, section, header';
   }
 
   serialize() {
@@ -50,13 +51,12 @@ class AddLinkRefactoring extends UsabilityRefactoringOnElement {
   }
 
   static asString() {
-    return "Add Link";
+    return 'Add Link';
   }
 
   getDescription() {
     return "Add a new link in a specific element of the target page. Link's name and destination URL must be provided";
   }
-
 }
 
 export default AddLinkRefactoring;

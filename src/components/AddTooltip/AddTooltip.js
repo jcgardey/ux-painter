@@ -4,7 +4,9 @@ import { FormField, Input } from '../Form/Form';
 
 export const AddTooltip = ({ refactoringApplication }) => {
   const refactoring = refactoringApplication.refactoring;
-  const [tooltipName, setTooltipName] = useState(refactoring.getTooltipName() || '');
+  const [tooltipName, setTooltipName] = useState(
+    refactoring.getTooltipName() || ''
+  );
 
   const onChange = (event) => {
     setTooltipName(event.target.value);
