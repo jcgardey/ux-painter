@@ -37,6 +37,13 @@ class UsabilityRefactoring {
     this.style = style;
   }
 
+  getStyle() {
+    if (!this.style) {
+      this.style = {};
+    }
+    return this.style;
+  }
+
   setURL(url) {
     this.url = url;
   }

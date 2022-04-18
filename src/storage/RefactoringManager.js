@@ -6,6 +6,7 @@ import TurnAttributeIntoLinkRefactoring from '../refactorings/TurnAttributeIntoL
 import AddLinkRefactoring from '../refactorings/AddLinkRefactoring';
 import AddTooltipRefactoring from '../refactorings/AddTooltipRefactoring';
 import LinkToTopRefactoring from '../refactorings/LinkToTopRefactoring';
+import TurnInputIntoRadiosRefactoring from '../refactorings/TurnInputIntoRadiosRefactoring';
 
 class RefactoringManager {
   constructor() {
@@ -78,13 +79,13 @@ class RefactoringManager {
       TurnAttributeIntoLinkRefactoring,
       AddLinkRefactoring,
       AddTooltipRefactoring,
-      LinkToTopRefactoring
-      
+      LinkToTopRefactoring,
+      TurnInputIntoRadiosRefactoring,
+
       /*AddFormValidationRefactoring, AddInlineFormValidationRefactoring,
             AddLinkRefactoring,AddProcessingPageRefactoring, AddTooltipRefactoring, DateInputIntoSelectsRefactoring, DistributeMenuRefactoring, FormatInputRefactoring, LinkToTopRefactoring, RenameElementRefactoring,
             ResizeInputRefactoring, SplitPageRefactoring, TurnAttributeIntoLinkRefactoring,
-        TurnInputIntoRadiosRefactoring, TurnInputIntoSelectRefactoring, TurnInputIntoTextareaRefactoring, TurnSelectIntoAutocompleteRefactoring*/,
-      ,
+        TurnInputIntoRadiosRefactoring, TurnInputIntoSelectRefactoring, TurnInputIntoTextareaRefactoring, TurnSelectIntoAutocompleteRefactoring*/
     ];
   }
 

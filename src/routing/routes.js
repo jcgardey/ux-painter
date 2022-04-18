@@ -11,7 +11,8 @@ import {
   RENAME_ELEMENT,
   TURN_ATTRIBUTE_INTO_LINK,
   ADD_LINK,
-  ADD_TOOLTIP
+  ADD_TOOLTIP,
+  TURN_INPUT_INTO_RADIOS,
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -22,6 +23,7 @@ import { RenameElement } from '../components/RenameElement/RenameElement';
 import { TurnAttributeIntoLink } from '../components/TurnAttributeIntoLink/TurnAttributeIntoLink';
 import { AddLink } from '../components/AddLink/AddLink';
 import { AddTooltip } from '../components/AddTooltip/AddTooltip';
+import { TurnInputIntoRadios } from '../components/TurnInputIntoRadios/TurnInputIntoRadios';
 
 export default [
   {
@@ -67,5 +69,9 @@ export default [
   {
     name: ADD_TOOLTIP,
     Component: AddTooltip,
-  }
+  },
+  {
+    name: TURN_INPUT_INTO_RADIOS,
+    Component: TurnInputIntoRadios,
+  },
 ];

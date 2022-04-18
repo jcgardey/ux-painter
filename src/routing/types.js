@@ -6,8 +6,10 @@ export const REFACTORING_CATALOGUE = 'refactoring_list';
 export const SINGLE_ELEMENT_SELECTION = 'single_element_selection';
 export const REFACTORING_PREVIEW = 'refactoring_preview';
 
-export const ADD_AUTOCOMPLETE_SUGGESTED_VALUES = 'add_autocomplete_suggested_values';
+export const ADD_AUTOCOMPLETE_SUGGESTED_VALUES =
+  'add_autocomplete_suggested_values';
 export const RENAME_ELEMENT = 'rename_element';
 export const TURN_ATTRIBUTE_INTO_LINK = 'turn_attribute_into_link';
 export const ADD_LINK = 'add_link';
 export const ADD_TOOLTIP = 'add_tooltip';
+export const TURN_INPUT_INTO_RADIOS = 'turn_input_into_radios';

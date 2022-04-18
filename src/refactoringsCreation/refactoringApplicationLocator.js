@@ -5,6 +5,7 @@ import TurnAttributeIntoLinkApplication from './TurnAttributeIntoLinkApplication
 import AddLinkApplication from './AddLinkApplication';
 import AddTooltipApplication from './AddTooltipApplication';
 import LinkToTopApplication from './LinkToTopApplication';
+import TurnInputIntoRadiosApplication from './TurnInputIntoRadiosApplication';
 
 const applications = {
   AddAutocompleteRefactoring: AddAutocompleteApplication,
@@ -13,7 +14,8 @@ const applications = {
   TurnAttributeIntoLinkRefactoring: TurnAttributeIntoLinkApplication,
   AddLinkRefactoring: AddLinkApplication,
   AddTooltipRefactoring: AddTooltipApplication,
-  LinkToTopRefactoring: LinkToTopApplication
+  LinkToTopRefactoring: LinkToTopApplication,
+  TurnInputIntoRadiosRefactoring: TurnInputIntoRadiosApplication,
 };
 
 export const locateRefactoringApplication = (refactoringName) =>
