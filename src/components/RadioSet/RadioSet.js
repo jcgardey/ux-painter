@@ -64,7 +64,7 @@ export const RadioSet = ({ values, refactoring }) => {
       onChange={(e) => handleOtherRadio(e)}
     />
   );
-  const otherLabel = <label style={labelsStyle}>Other</label>;
+  const otherLabel = <label>Other</label>;
 
   let otherInputStyle = refactoring.getOtherInputStyle();
   otherInputStyle.display = 'none';
@@ -73,7 +73,7 @@ export const RadioSet = ({ values, refactoring }) => {
   return (
     <div className={'uxpainter-radio-set'}>
       {radios}
-      <p style={refactoring.getItemStyle()}>
+      <p>
         {renderRadioItem(otherInput, otherLabel)}
         <input
           type={'text'}
