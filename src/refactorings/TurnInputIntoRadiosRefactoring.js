@@ -1,25 +1,120 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
-import ReactDOM from 'react-dom';
-import React from 'react';
-import { RadioSet } from '../components/RadioSet/RadioSet';
 
 class TurnInputIntoRadiosRefactoring extends UsabilityRefactoringOnElement {
   constructor() {
     super();
     this.values = [];
+    this.radios = document.createElement('div');
+    this.otherInput = document.createElement('input');
+    this.otherElementText = document.createElement('p');
+  }
+
+  handleChange = (event) => {
+    this.getElement().value = event.target.value;
+    if (event.target.type == 'radio') {
+      this.otherElementText.style.display = 'none';
+    }
+  };
+
+  handleOtherRadio = () => {
+    this.getElement().value = '';
+    this.otherInput.value = '';
+    this.otherElementText.style.display = 'inline';
+  };
+
+  createRadios(radioName) {
+    this.getValues().map((value, i) => {
+      let radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.style.width = 'auto';
+      radio.value = value;
+      radio.name = radioName;
+      radio.addEventListener('click', (e) => this.handleChange(e));
+
+      let labelStyle = this.getLabelsStyle();
+      labelStyle.cursor = 'pointer';
+      labelStyle.display = 'inline';
+
+      let label = document.createElement('label');
+      label.style = labelStyle;
+      label.style.marginLeft = '3px';
+      label.style.marginRight = '3px';
+      label.textContent = value;
+
+      let element = document.createElement('p');
+      element.key = i;
+      element.style = this.getItemStyle();
+      element.appendChild(radio);
+      element.appendChild(label);
+
+      this.radios.appendChild(element);
+    });
+  }
+
+  createOtherRadio(radioName) {
+    let otherRadio = document.createElement('input');
+    otherRadio.type = 'radio';
+    otherRadio.style.width = 'auto';
+    otherRadio.value = 'Other';
+    otherRadio.name = radioName;
+    otherRadio.addEventListener('click', (e) => this.handleOtherRadio(e));
+
+    let otherLabelStyle = this.getLabelsStyle();
+    otherLabelStyle.cursor = 'pointer';
+    otherLabelStyle.display = 'inline';
+
+    let otherLabel = document.createElement('label');
+    otherLabel.style = otherLabelStyle;
+    otherLabel.style.marginLeft = '3px';
+    otherLabel.style.marginRight = '3px';
+    otherLabel.textContent = 'Other';
+
+    let otherElement = document.createElement('p');
+    otherElement.style = this.getItemStyle();
+    otherElement.appendChild(otherRadio);
+    otherElement.appendChild(otherLabel);
+
+    return otherElement;
+  }
+
+  createTextInput() {
+    let otherInputStyle = this.getOtherInputStyle();
+    otherInputStyle.display = 'none';
+    otherInputStyle['marginLeft'] = '5px';
+
+    this.otherInput.type = 'text';
+    this.otherInput.style = otherInputStyle;
+    this.otherInput.placeholder = 'Enter new value';
+    this.otherInput.addEventListener('change', (e) => this.handleChange(e));
+
+    this.otherElementText.style.display = 'none';
+    this.otherElementText.appendChild(this.otherInput);
   }
 
   transform() {
-    this.getElement().setAttribute('type', 'hidden');
-    this.radioSetContainer = document.createElement('div');
+    let radioName =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
+
+    // is necesary to reset radios
+    this.radios = document.createElement('div');
+
+    this.createRadios(radioName);
+
+    let otherRadio = this.createOtherRadio(radioName);
+
+    this.radios.appendChild(otherRadio);
+
     this.getElement().parentNode.insertBefore(
-      this.radioSetContainer,
-      this.getElement()
+      this.radios,
+      this.getElement().nextElementSibling
     );
-    ReactDOM.render(
-      <RadioSet values={this.getValues()} refactoring={this} />,
-      this.radioSetContainer
-    );
+
+    this.createTextInput();
+
+    this.getElement().parentNode.appendChild(this.otherElementText);
+
+    this.getElement().setAttribute('type', 'hidden');
   }
 
   checkPreconditions() {
@@ -31,7 +126,8 @@ class TurnInputIntoRadiosRefactoring extends UsabilityRefactoringOnElement {
   }
 
   unDo() {
-    this.getElement().parentNode.removeChild(this.radioSetContainer);
+    this.getElement().parentNode.removeChild(this.radios);
+    this.getElement().parentNode.removeChild(this.otherElementText);
     this.getElement().setAttribute('type', 'text');
   }
 
