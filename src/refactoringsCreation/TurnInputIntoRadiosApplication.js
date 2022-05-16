@@ -16,7 +16,7 @@ class TurnInputIntoRadiosApplication extends RefactoringApplication {
       view: TURN_INPUT_INTO_RADIOS,
     },
     {
-      title: 'Add Autocomplete Preview',
+      title: 'Turn Input Into Radios Preview',
       view: REFACTORING_PREVIEW,
     },
   ];
