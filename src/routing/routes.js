@@ -13,6 +13,7 @@ import {
   ADD_LINK,
   ADD_TOOLTIP,
   TURN_INPUT_INTO_RADIOS,
+  TURN_INPUT_INTO_SELECT,
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -24,6 +25,7 @@ import { TurnAttributeIntoLink } from '../components/TurnAttributeIntoLink/TurnA
 import { AddLink } from '../components/AddLink/AddLink';
 import { AddTooltip } from '../components/AddTooltip/AddTooltip';
 import { TurnInputIntoRadios } from '../components/TurnInputIntoRadios/TurnInputIntoRadios';
+import { TurnInputIntoSelect } from '../components/TurnInputIntoSelect/TurnInputIntoSelect';
 
 export default [
   {
@@ -73,5 +75,9 @@ export default [
   {
     name: TURN_INPUT_INTO_RADIOS,
     Component: TurnInputIntoRadios,
+  },
+  {
+    name: TURN_INPUT_INTO_SELECT,
+    Component: TurnInputIntoSelect,
   },
 ];
