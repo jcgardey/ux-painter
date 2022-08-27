@@ -9,6 +9,7 @@ import LinkToTopRefactoring from '../refactorings/LinkToTopRefactoring';
 import TurnInputIntoRadiosRefactoring from '../refactorings/TurnInputIntoRadiosRefactoring';
 import TurnInputIntoSelectRefactoring from '../refactorings/TurnInputIntoSelectRefactoring';
 import ResizeInputRefactoring from '../refactorings/ResizeInputRefactoring';
+import TurnInputIntoTextareaRefactoring from '../refactorings/TurnInputIntoTextareaRefactoring';
 
 class RefactoringManager {
   constructor() {
@@ -85,6 +86,7 @@ class RefactoringManager {
       TurnInputIntoRadiosRefactoring,
       TurnInputIntoSelectRefactoring,
       ResizeInputRefactoring,
+      TurnInputIntoTextareaRefactoring,
 
       /*AddFormValidationRefactoring, AddInlineFormValidationRefactoring,
             AddLinkRefactoring,AddProcessingPageRefactoring, AddTooltipRefactoring, DateInputIntoSelectsRefactoring, DistributeMenuRefactoring, FormatInputRefactoring, LinkToTopRefactoring, RenameElementRefactoring,
