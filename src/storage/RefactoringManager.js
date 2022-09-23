@@ -11,6 +11,7 @@ import TurnInputIntoSelectRefactoring from '../refactorings/TurnInputIntoSelectR
 import ResizeInputRefactoring from '../refactorings/ResizeInputRefactoring';
 import TurnInputIntoTextareaRefactoring from '../refactorings/TurnInputIntoTextareaRefactoring';
 import TurnSelectIntoAutocompleteRefactoring from '../refactorings/TurnSelectIntoAutocompleteRefactoring';
+import DateInputIntoSelectsRefactoring from '../refactorings/DateInputIntoSelectsRefactoring';
 
 class RefactoringManager {
   constructor() {
@@ -89,6 +90,7 @@ class RefactoringManager {
       ResizeInputRefactoring,
       TurnInputIntoTextareaRefactoring,
       TurnSelectIntoAutocompleteRefactoring,
+      DateInputIntoSelectsRefactoring,
 
       /*AddFormValidationRefactoring, AddInlineFormValidationRefactoring,
             AddLinkRefactoring,AddProcessingPageRefactoring, AddTooltipRefactoring, DateInputIntoSelectsRefactoring, DistributeMenuRefactoring, FormatInputRefactoring, LinkToTopRefactoring, RenameElementRefactoring,
