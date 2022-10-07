@@ -15,6 +15,7 @@ import {
   TURN_INPUT_INTO_RADIOS,
   TURN_INPUT_INTO_SELECT,
   RESIZE_INPUT,
+  FORMAT_INPUT,
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -28,6 +29,7 @@ import { AddTooltip } from '../components/AddTooltip/AddTooltip';
 import { TurnInputIntoRadios } from '../components/TurnInputIntoRadios/TurnInputIntoRadios';
 import { TurnInputIntoSelect } from '../components/TurnInputIntoSelect/TurnInputIntoSelect';
 import { ResizeInput } from '../components/ResizeInput/ResizeInput';
+import { FormatInput } from '../components/FormatInput/FormatInput';
 
 export default [
   {
@@ -85,5 +87,9 @@ export default [
   {
     name: RESIZE_INPUT,
     Component: ResizeInput,
+  },
+  {
+    name: FORMAT_INPUT,
+    Component: FormatInput,
   },
 ];

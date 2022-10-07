@@ -42,6 +42,7 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
 
   transform() {
     let dateInput = this.getElement();
+    dateInput.style.display = 'none';
     console.log(dateInput);
     console.log('ANTES: ', dateInput.value);
 
@@ -101,7 +102,11 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
         me.actualDate
       )}-${me.day(me.actualDate)}`;
       // dateInput.value = new Date(dateInput.value);
-      // dateInput.value = `${me.actualDate.getDate()}/${me.actualDate.getMonth()}/${me.actualDate.getFullYear()}`;
+      dateInput.value = `${me.actualDate.getDate()}/${
+        me.actualDate.getMonth() + 1
+      }/${me.actualDate.getFullYear()}`;
+      // dateInput.value = '30/10/2022';
+      // dateInput.value = new Date();
     });
 
     dateInput.parentNode.insertBefore(this.selectMonth, dateInput.nextSibling);
