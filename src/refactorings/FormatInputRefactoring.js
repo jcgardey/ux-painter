@@ -3,6 +3,7 @@ import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 class FormatInputRefactoring extends UsabilityRefactoringOnElement {
   constructor() {
     super();
+    this.handler = this.handler.bind(this);
   }
 
   setFormatString(aString) {
@@ -17,95 +18,97 @@ class FormatInputRefactoring extends UsabilityRefactoringOnElement {
     return super.checkPreconditions() && this.getFormatString();
   }
 
-  transform() {
-    const me = this;
+  handler(event) {
     let input = this.getElement();
-    input.placeholder = this.getPlaceholder();
-    input.addEventListener('input', (event) => {
-      if (me.getFormatString().length >= input.value.length) {
-        if (me.getFormatString()[input.value.length - 1] == 0) {
-          if (isNaN(input.value[input.value.length - 1])) {
+    if (this.getFormatString().length >= input.value.length) {
+      if (this.getFormatString()[input.value.length - 1] == 0) {
+        if (isNaN(input.value[input.value.length - 1])) {
+          input.value = input.value.substring(0, input.value.length - 1);
+        } else {
+          let character = input.value.length;
+          while (
+            event.data != null &&
+            this.getFormatString().length > input.value.length &&
+            this.getFormatString()[character] != 0 &&
+            this.getFormatString()[character] != 'S' &&
+            this.getFormatString()[character] != 'A'
+          ) {
+            input.value = input.value + this.getFormatString()[character];
+            character += 1;
+          }
+        }
+      } else {
+        if (this.getFormatString()[input.value.length - 1] == 'S') {
+          if (isNaN(input.value[input.value.length - 1]) == false) {
             input.value = input.value.substring(0, input.value.length - 1);
           } else {
             let character = input.value.length;
             while (
               event.data != null &&
-              me.getFormatString().length > input.value.length &&
-              me.getFormatString()[character] != 0 &&
-              me.getFormatString()[character] != 'S' &&
-              me.getFormatString()[character] != 'A'
+              this.getFormatString().length > input.value.length &&
+              this.getFormatString()[character] != 0 &&
+              this.getFormatString()[character] != 'S' &&
+              this.getFormatString()[character] != 'A'
             ) {
-              input.value = input.value + me.getFormatString()[character];
+              input.value = input.value + this.getFormatString()[character];
               character += 1;
             }
           }
         } else {
-          if (me.getFormatString()[input.value.length - 1] == 'S') {
-            if (isNaN(input.value[input.value.length - 1]) == false) {
-              input.value = input.value.substring(0, input.value.length - 1);
-            } else {
-              let character = input.value.length;
-              while (
-                event.data != null &&
-                me.getFormatString().length > input.value.length &&
-                me.getFormatString()[character] != 0 &&
-                me.getFormatString()[character] != 'S' &&
-                me.getFormatString()[character] != 'A'
-              ) {
-                input.value = input.value + me.getFormatString()[character];
-                character += 1;
-              }
+          if (this.getFormatString()[input.value.length - 1] == 'A') {
+            let character = input.value.length;
+            while (
+              event.data != null &&
+              this.getFormatString().length > input.value.length &&
+              this.getFormatString()[character] != 0 &&
+              this.getFormatString()[character] != 'S' &&
+              this.getFormatString()[character] != 'A'
+            ) {
+              input.value = input.value + this.getFormatString()[character];
+              character += 1;
             }
           } else {
-            if (me.getFormatString()[input.value.length - 1] == 'A') {
+            if (
+              event.data != null &&
+              (isNaN(this.getFormatString()[input.value.length]) ==
+                isNaN(event.data) ||
+                this.getFormatString()[input.value.length] == 'A')
+            ) {
+              input.value = input.value.substring(0, input.value.length - 1);
               let character = input.value.length;
               while (
-                event.data != null &&
-                me.getFormatString().length > input.value.length &&
-                me.getFormatString()[character] != 0 &&
-                me.getFormatString()[character] != 'S' &&
-                me.getFormatString()[character] != 'A'
+                this.getFormatString().length > input.value.length &&
+                this.getFormatString()[character] != 0 &&
+                this.getFormatString()[character] != 'S' &&
+                this.getFormatString()[character] != 'A'
               ) {
-                input.value = input.value + me.getFormatString()[character];
+                input.value = input.value + this.getFormatString()[character];
                 character += 1;
               }
+              input.value = input.value + event.data;
             } else {
-              if (
-                event.data != null &&
-                (isNaN(me.getFormatString()[input.value.length]) ==
-                  isNaN(event.data) ||
-                  me.getFormatString()[input.value.length] == 'A')
-              ) {
+              if (event.data != null) {
                 input.value = input.value.substring(0, input.value.length - 1);
-                let character = input.value.length;
-                while (
-                  me.getFormatString().length > input.value.length &&
-                  me.getFormatString()[character] != 0 &&
-                  me.getFormatString()[character] != 'S' &&
-                  me.getFormatString()[character] != 'A'
-                ) {
-                  input.value = input.value + me.getFormatString()[character];
-                  character += 1;
-                }
-                input.value = input.value + event.data;
-              } else {
-                if (event.data != null) {
-                  input.value = input.value.substring(
-                    0,
-                    input.value.length - 1
-                  );
-                }
               }
             }
           }
         }
-      } else {
-        input.value = input.value.substring(0, input.value.length - 1);
       }
-    });
+    } else {
+      input.value = input.value.substring(0, input.value.length - 1);
+    }
   }
 
-  unDo() {}
+  transform() {
+    let input = this.getElement();
+    input.placeholder = this.getPlaceholder();
+    input.addEventListener('input', this.handler);
+  }
+
+  unDo() {
+    let input = this.getElement();
+    input.removeEventListener('input', this.handler);
+  }
 
   targetElements() {
     return "input[type='text']";
