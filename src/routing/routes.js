@@ -16,6 +16,7 @@ import {
   TURN_INPUT_INTO_SELECT,
   RESIZE_INPUT,
   FORMAT_INPUT,
+  DATE_INPUT_INTO_SELECTS,
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -30,6 +31,7 @@ import { TurnInputIntoRadios } from '../components/TurnInputIntoRadios/TurnInput
 import { TurnInputIntoSelect } from '../components/TurnInputIntoSelect/TurnInputIntoSelect';
 import { ResizeInput } from '../components/ResizeInput/ResizeInput';
 import { FormatInput } from '../components/FormatInput/FormatInput';
+import { DateInputIntoSelects } from '../components/DateInputIntoSelects/DateInputIntoSelects';
 
 export default [
   {
@@ -91,5 +93,9 @@ export default [
   {
     name: FORMAT_INPUT,
     Component: FormatInput,
+  },
+  {
+    name: DATE_INPUT_INTO_SELECTS,
+    Component: DateInputIntoSelects,
   },
 ];

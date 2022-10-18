@@ -16,3 +16,4 @@ export const TURN_INPUT_INTO_RADIOS = 'turn_input_into_radios';
 export const TURN_INPUT_INTO_SELECT = 'turn_input_into_select';
 export const RESIZE_INPUT = 'resize_input';
 export const FORMAT_INPUT = 'format_input';
+export const DATE_INPUT_INTO_SELECTS = 'date_input_into_selects';

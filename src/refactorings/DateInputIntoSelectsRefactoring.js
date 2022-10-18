@@ -1,22 +1,13 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
-  transform2 = function () {
-    var dateInput = $(this.getElement());
-    if (typeof dateInput[0] != 'undefined') {
-      this.submitFieldName = dateInput.attr('name');
-      dateInput.attr('name', '');
-      dateInput.dropdownDatepicker({
-        ...{
-          submitFieldName: this.submitFieldName,
-          daySuffixes: false,
-          monthSuffixes: false,
-        },
-        ...this.getLanguageOptions()['es'],
-      });
-      this.applyStyles(this.getSelects(), this.getStyle().selectElement);
-    }
-  };
+  setFormat(format) {
+    this.format = format;
+  }
+
+  getFormat() {
+    return this.format;
+  }
 
   day(date) {
     let day = date.getDate();
@@ -40,17 +31,58 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
     select.appendChild(optionElement);
   }
 
+  setValue(dateInput) {
+    const me = this;
+
+    if (me.getFormat() == '1') {
+      dateInput.value = `${me.day(me.actualDate)}/${me.month(
+        me.actualDate
+      )}/${me.actualDate.getFullYear()}`;
+    } else {
+      if (me.getFormat() == '2') {
+        dateInput.value = `${me.month(me.actualDate)}/${me.day(
+          me.actualDate
+        )}/${me.actualDate.getFullYear()}`;
+      } else {
+        if (me.getFormat() == '3') {
+          dateInput.value = `${me.actualDate.getFullYear()}/${me.month(
+            me.actualDate
+          )}/${me.day(me.actualDate)}`;
+        } else {
+          if (me.getFormat() == '4') {
+            dateInput.value = `${me.day(me.actualDate)}-${me.month(
+              me.actualDate
+            )}-${me.actualDate.getFullYear()}`;
+          } else {
+            if (me.getFormat() == '5') {
+              dateInput.value = `${me.month(me.actualDate)}-${me.day(
+                me.actualDate
+              )}-${me.actualDate.getFullYear()}`;
+            } else {
+              if (me.getFormat() == '6') {
+                dateInput.value = `${me.actualDate.getFullYear()}-${me.month(
+                  me.actualDate
+                )}-${me.day(me.actualDate)}`;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   transform() {
     let dateInput = this.getElement();
     dateInput.style.display = 'none';
-    console.log(dateInput);
-    console.log('ANTES: ', dateInput.value);
 
     const me = this;
 
     this.actualDate = new Date(`January 1 ${new Date().getFullYear()}`);
 
     this.selectYear = document.createElement('select');
+    this.selectYear.id = 'select_year';
+    this.selectYear.style.marginBottom = '5px';
+    this.selectYear.style.marginRight = '5px';
 
     for (let i = new Date().getFullYear(); i >= 1970; i--) {
       this.createOption(i, this.selectYear);
@@ -62,16 +94,15 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
           me.selectYear.value
         }`
       );
-      dateInput.value = `${me.actualDate.getFullYear()}-${me.month(
-        me.actualDate
-      )}-${me.day(me.actualDate)}`;
-      // dateInput.value = new Date('09/25/2022');
-      // dateInput.value = `${me.actualDate.getDate()}/${me.actualDate.getMonth()}/${me.actualDate.getFullYear()}`;
+      me.setValue(dateInput);
     });
 
     dateInput.parentNode.insertBefore(this.selectYear, dateInput.nextSibling);
 
     this.selectMonth = document.createElement('select');
+    this.selectMonth.id = 'select_month';
+    this.selectMonth.style.marginBottom = '5px';
+    this.selectMonth.style.marginRight = '5px';
 
     let months = [
       'January',
@@ -98,20 +129,15 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
           me.selectMonth.value
         } ${me.actualDate.getDate()} ${me.actualDate.getFullYear()}`
       );
-      dateInput.value = `${me.actualDate.getFullYear()}-${me.month(
-        me.actualDate
-      )}-${me.day(me.actualDate)}`;
-      // dateInput.value = new Date(dateInput.value);
-      dateInput.value = `${me.actualDate.getDate()}/${
-        me.actualDate.getMonth() + 1
-      }/${me.actualDate.getFullYear()}`;
-      // dateInput.value = '30/10/2022';
-      // dateInput.value = new Date();
+      me.setValue(dateInput);
     });
 
     dateInput.parentNode.insertBefore(this.selectMonth, dateInput.nextSibling);
 
     this.selectDay = document.createElement('select');
+    this.selectDay.id = 'select_day';
+    this.selectDay.style.marginBottom = '5px';
+    this.selectDay.style.marginRight = '5px';
 
     for (let i = 1; i <= 31; i++) {
       this.createOption(i, this.selectDay);
@@ -123,20 +149,21 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
           me.selectDay.value
         } ${me.actualDate.getFullYear()}`
       );
-      dateInput.value = `${me.actualDate.getFullYear()}-${me.month(
-        me.actualDate
-      )}-${me.day(me.actualDate)}`;
-      // dateInput.value = new Date(dateInput.value);
-      // dateInput.value = `${me.actualDate.getDate()}/${me.actualDate.getMonth()}/${me.actualDate.getFullYear()}`;
+      me.setValue(dateInput);
     });
 
     dateInput.parentNode.insertBefore(this.selectDay, dateInput.nextSibling);
   }
 
   unDo() {
-    $(this.getElement()).dropdownDatepicker('destroy');
-    this.getElement().setAttribute('type', 'text');
-    this.getElement().setAttribute('name', this.submitFieldName);
+    let dateInput = this.getElement();
+    dateInput.style.display = 'block';
+    let element = document.getElementById('select_year');
+    element.remove();
+    element = document.getElementById('select_month');
+    element.remove();
+    element = document.getElementById('select_day');
+    element.remove();
   }
 
   targetElements() {
@@ -145,79 +172,6 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
 
   getSelects() {
     return this.getElement().parentNode.querySelectorAll('select');
-  }
-
-  getLanguageOptions() {
-    return {
-      es: {
-        dayLabel: 'Día',
-        monthLabel: 'Mes',
-        yearLabel: 'Año',
-        monthLongValues: [
-          'Enero',
-          'Febrero',
-          'Marzo',
-          'Abril',
-          'Mayo',
-          'Junio',
-          'Julio',
-          'Agosto',
-          'Septiembre',
-          'Octubre',
-          'Noviembre',
-          'Diciembre',
-        ],
-        monthShortValues: [
-          'Ene',
-          'Feb',
-          'Mar',
-          'Abr',
-          'May',
-          'Jun',
-          'Jul',
-          'Ago',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dic',
-        ],
-        initialDayMonthYearValues: ['Día', 'Mes', 'Año'],
-      },
-      en: {
-        dayLabel: 'Day',
-        monthLabel: 'Month',
-        yearLabel: 'Year',
-        monthLongValues: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ],
-        monthShortValues: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
-        ],
-        initialDayMonthYearValues: ['Day', 'Month', 'Year'],
-      },
-    };
   }
 
   static asString() {
