@@ -12,6 +12,7 @@ import TurnInputIntoTextareaApplication from './TurnInputIntoTextareaApplication
 import TurnSelectIntoAutocompleteApplication from './TurnSelectIntoAutocompleteApplication';
 import DateInputIntoSelectsApplication from './DateInputIntoSelectsApplication';
 import FormatInputApplication from './FormatInputApplication';
+import AddLoadingOverlayApplication from './AddLoadingOverlayApplication';
 
 const applications = {
   AddAutocompleteRefactoring: AddAutocompleteApplication,
@@ -28,6 +29,7 @@ const applications = {
   TurnSelectIntoAutocompleteRefactoring: TurnSelectIntoAutocompleteApplication,
   DateInputIntoSelectsRefactoring: DateInputIntoSelectsApplication,
   FormatInputRefactoring: FormatInputApplication,
+  AddLoadingOverlayRefactoring: AddLoadingOverlayApplication,
 };
 
 export const locateRefactoringApplication = (refactoringName) =>
