@@ -14,6 +14,7 @@ import TurnSelectIntoAutocompleteRefactoring from '../refactorings/TurnSelectInt
 import DateInputIntoSelectsRefactoring from '../refactorings/DateInputIntoSelectsRefactoring';
 import FormatInputRefactoring from '../refactorings/FormatInputRefactoring';
 import AddLoadingOverlayRefactoring from '../refactorings/AddLoadingOverlayRefactoring';
+import AddFormValidationRefactoring from '../refactorings/AddFormValidationRefactoring';
 
 class RefactoringManager {
   constructor() {
@@ -95,6 +96,7 @@ class RefactoringManager {
       DateInputIntoSelectsRefactoring,
       FormatInputRefactoring,
       AddLoadingOverlayRefactoring,
+      AddFormValidationRefactoring,
     ];
   }
 

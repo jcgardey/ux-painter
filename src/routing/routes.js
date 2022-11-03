@@ -17,6 +17,7 @@ import {
   RESIZE_INPUT,
   FORMAT_INPUT,
   DATE_INPUT_INTO_SELECTS,
+  ADD_FORM_VALIDATION,
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -32,6 +33,7 @@ import { TurnInputIntoSelect } from '../components/TurnInputIntoSelect/TurnInput
 import { ResizeInput } from '../components/ResizeInput/ResizeInput';
 import { FormatInput } from '../components/FormatInput/FormatInput';
 import { DateInputIntoSelects } from '../components/DateInputIntoSelects/DateInputIntoSelects';
+import { AddFormValidation } from '../components/AddFormValidation/AddFormValidation';
 
 export default [
   {
@@ -97,5 +99,9 @@ export default [
   {
     name: DATE_INPUT_INTO_SELECTS,
     Component: DateInputIntoSelects,
+  },
+  {
+    name: ADD_FORM_VALIDATION,
+    Component: AddFormValidation,
   },
 ];
