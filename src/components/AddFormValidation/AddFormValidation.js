@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import XPathInterpreter from '../../utils/XPathInterpreter';
 import ElementSelectionGif from '../Selection/ElementSelectionGif';
-import style from '../Selection/SingleElementSelection.module.css';
+// import style from '../Selection/SingleElementSelection.module.css';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
 import { usePageSelector } from '../../context/PageSelectorContext';
 
@@ -40,25 +40,6 @@ export const AddFormValidation = ({ refactoringApplication }) => {
   }, []);
 
   const onElementSelection = (elementSelected) => {
-    // if (refactoring.getElement()) {
-    //   pageSelector.removeSelectionClass(
-    //     refactoring.getElement(),
-    //     pageSelector.selectionClass
-    //   );
-    // } else {
-    //   setElementSelected(true);
-    // }
-    // const elementXpath = new XPathInterpreter().getPath(
-    //   elementSelected,
-    //   document.body
-    // )[0];
-    // refactoring.setElementXpath(elementXpath);
-    // refactoring.setElement(elementSelected);
-    // pageSelector.addSelectionClass(
-    //   elementSelected,
-    //   pageSelector.selectionClass
-    // );
-
     pageSelector.addRequiredField(elementSelected);
     const elementXpath = new XPathInterpreter().getPath(
       elementSelected,
@@ -69,8 +50,6 @@ export const AddFormValidation = ({ refactoringApplication }) => {
 
       requiredInputs.push(elementXpath);
       setRequiredInputs(requiredInputs);
-
-      refactoring.setRequiredInputXpaths(requiredInputs);
 
       requiredInputsFrontend.push('Input ');
       setRequiredInputsFrontend([...requiredInputsFrontend]);
@@ -102,7 +81,6 @@ export const AddFormValidation = ({ refactoringApplication }) => {
         } else {
           if (
             validation == 'regular_expression' &&
-            // !requiredInputs[index].value.match(references[index].current.value)
             references[index].current.value == ''
           ) {
             setErrorInRegularExpression(true);
@@ -118,12 +96,17 @@ export const AddFormValidation = ({ refactoringApplication }) => {
   };
 
   const next = () => {
-    setErrorInSelection(false);
     setErrorInChoice(false);
     setErrorInRegularExpression(false);
+    let regular_expression = [];
+    references.map((data) => {
+      regular_expression.push(data.current.value);
+    });
     if (checkValidations()) {
-      // return elementSelected;
-      console.log('SIN ERROR');
+      let inputs = [requiredInputs, formValidations, regular_expression];
+      refactoring.setRequiredInputXpaths(inputs);
+      disableElementSelection();
+      return elementSelected;
     }
   };
 
@@ -168,10 +151,7 @@ export const AddFormValidation = ({ refactoringApplication }) => {
         {requiredInputsFrontend.map((data, index) => {
           return (
             <div key={index}>
-              <h4 key={index}>
-                {data}
-                {/* <i className="fas fa-trash-alt" style={{ color: 'red' }}></i> */}
-              </h4>
+              <h4 key={index}>{data}</h4>
               <input
                 type={'radio'}
                 name={index}

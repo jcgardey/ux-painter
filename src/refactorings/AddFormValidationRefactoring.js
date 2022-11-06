@@ -7,10 +7,34 @@ class AddFormValidationRefactoring extends UsabilityRefactoringOnElement {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  checkValidations(requiredInput, index) {
+    if (
+      this.getRequiredInputXpaths()[1][index] == 'required' &&
+      requiredInput.value != ''
+    ) {
+      return false;
+    } else {
+      if (
+        this.getRequiredInputXpaths()[1][index] == 'regular_expression' &&
+        new RegExp(
+          this.getRequiredInputXpaths()[2][index].substring(
+            1,
+            this.getRequiredInputXpaths()[2][index].length - 1
+          )
+        ).test(requiredInput.value)
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  }
+
   onSubmit(event) {
     let invalidInputs = false;
-    this.getRequiredInputs().map(function (requiredInput) {
-      if (!requiredInput || !requiredInput.value) {
+    const me = this;
+    this.getRequiredInputs().map((requiredInput, index) => {
+      if (me.checkValidations(requiredInput, index)) {
         requiredInput.style.backgroundColor = 'rgb(255,200,200)';
         invalidInputs = true;
       } else {
@@ -27,11 +51,17 @@ class AddFormValidationRefactoring extends UsabilityRefactoringOnElement {
   }
 
   transform() {
-    this.getElement().addEventListener('click', this.onSubmit);
+    this.submit = this.getElement();
+    this.button = this.submit.cloneNode(true);
+    this.button.setAttribute('type', 'button');
+    this.button.addEventListener('click', this.onSubmit);
+    this.submit.style.display = 'none';
+    this.submit.parentNode.insertBefore(this.button, this.submit);
   }
 
   unDo() {
-    this.getElement().removeEventListener('click', this.onSubmit);
+    this.button.parentNode.removeChild(this.button);
+    this.submit.style.display = '';
   }
 
   checkPreconditions() {
@@ -52,7 +82,7 @@ class AddFormValidationRefactoring extends UsabilityRefactoringOnElement {
 
   getRequiredInputs() {
     const me = this;
-    return this.getRequiredInputXpaths().map(function (inputXpath) {
+    return this.getRequiredInputXpaths()[0].map(function (inputXpath) {
       return new XPathInterpreter().getElementByXPath(
         inputXpath,
         me.getElement()
@@ -62,12 +92,6 @@ class AddFormValidationRefactoring extends UsabilityRefactoringOnElement {
 
   targetElements() {
     return "input[type='submit'],button[type='submit']";
-  }
-
-  clone(aContext) {
-    let clonedRefactoring = super.clone(aContext);
-    clonedRefactoring.setRequiredInputXpaths(this.getRequiredInputXpaths());
-    return clonedRefactoring;
   }
 
   static asString() {
