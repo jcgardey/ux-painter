@@ -14,6 +14,7 @@ import DateInputIntoSelectsApplication from './DateInputIntoSelectsApplication';
 import FormatInputApplication from './FormatInputApplication';
 import AddLoadingOverlayApplication from './AddLoadingOverlayApplication';
 import AddFormValidationApplication from './AddFormValidationApplication';
+import AddInlineValidationApplication from './AddInlineValidationApplication';
 
 const applications = {
   AddAutocompleteRefactoring: AddAutocompleteApplication,
@@ -32,6 +33,7 @@ const applications = {
   FormatInputRefactoring: FormatInputApplication,
   AddLoadingOverlayRefactoring: AddLoadingOverlayApplication,
   AddFormValidationRefactoring: AddFormValidationApplication,
+  AddInlineValidationRefactoring: AddInlineValidationApplication,
 };
 
 export const locateRefactoringApplication = (refactoringName) =>

@@ -15,6 +15,7 @@ import DateInputIntoSelectsRefactoring from '../refactorings/DateInputIntoSelect
 import FormatInputRefactoring from '../refactorings/FormatInputRefactoring';
 import AddLoadingOverlayRefactoring from '../refactorings/AddLoadingOverlayRefactoring';
 import AddFormValidationRefactoring from '../refactorings/AddFormValidationRefactoring';
+import AddInlineValidationRefactoring from '../refactorings/AddInlineValidationRefactoring';
 
 class RefactoringManager {
   constructor() {
@@ -97,6 +98,7 @@ class RefactoringManager {
       FormatInputRefactoring,
       AddLoadingOverlayRefactoring,
       AddFormValidationRefactoring,
+      AddInlineValidationRefactoring,
     ];
   }
 
