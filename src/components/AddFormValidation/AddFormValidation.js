@@ -5,6 +5,7 @@ import ElementSelectionGif from '../Selection/ElementSelectionGif';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
 import { usePageSelector } from '../../context/PageSelectorContext';
 import formStyle from '../Form/Form.module.css';
+import './AddFormValidation.css';
 
 export const AddFormValidation = ({ refactoringApplication }) => {
   const refactoring = refactoringApplication.refactoring;
@@ -25,6 +26,10 @@ export const AddFormValidation = ({ refactoringApplication }) => {
   const [references, setReferences] = useState([]);
 
   const [formValidations, setFormValidations] = useState([]);
+
+  const [labels, setLabels] = useState([]);
+
+  const [editIcon, setEditIcon] = useState([]);
 
   useEffect(() => {
     if (refactoring.getElement()) {
@@ -52,11 +57,17 @@ export const AddFormValidation = ({ refactoringApplication }) => {
       requiredInputs.push(elementXpath);
       setRequiredInputs(requiredInputs);
 
-      requiredInputsFrontend.push('Input ');
+      requiredInputsFrontend.push('Input');
       setRequiredInputsFrontend([...requiredInputsFrontend]);
 
       references.push(React.createRef());
       setReferences([...references]);
+
+      labels.push(React.createRef());
+      setLabels([...labels]);
+
+      editIcon.push(React.createRef());
+      setEditIcon([...editIcon]);
 
       formValidations.push('empty');
       setFormValidations([...formValidations]);
@@ -125,6 +136,28 @@ export const AddFormValidation = ({ refactoringApplication }) => {
     setFormValidations(validations);
   };
 
+  const editLabel = (index) => {
+    labels[index].current.style.display = 'block';
+    editIcon[index].current.style.display = 'none';
+  };
+
+  const updateLabel = (index) => {
+    if (labels[index].current.firstChild.value != '') {
+      editIcon[index].current.style.display = 'inline';
+      labels[index].current.style.display = 'none';
+      let newRequiredInputsFrontend = requiredInputsFrontend;
+      newRequiredInputsFrontend[index] = labels[index].current.firstChild.value;
+      setRequiredInputsFrontend([...newRequiredInputsFrontend]);
+      labels[index].current.firstChild.value = '';
+    }
+  };
+
+  const closeInput = (index) => {
+    editIcon[index].current.style.display = 'inline';
+    labels[index].current.style.display = 'none';
+    labels[index].current.firstChild.value = '';
+  };
+
   return (
     <>
       <RefactoringApplicationSteps
@@ -152,7 +185,41 @@ export const AddFormValidation = ({ refactoringApplication }) => {
         {requiredInputsFrontend.map((data, index) => {
           return (
             <div key={index}>
-              <h4 key={index}>{data}</h4>
+              <h4 key={index}>
+                {data}
+                <i
+                  id="iconEditLabel"
+                  className="fas fa-edit"
+                  style={{ marginLeft: '5px' }}
+                  onClick={() => {
+                    editLabel(index);
+                  }}
+                  ref={editIcon[index]}
+                ></i>
+              </h4>
+              <div style={{ display: 'none' }} ref={labels[index]}>
+                <input
+                  style={{ display: 'inline', margin: '5px', width: '70%' }}
+                  className={`${formStyle.input}`}
+                ></input>
+                <i
+                  id="iconEditLabel"
+                  className="fas fa-check-circle fa-lg"
+                  style={{ marginLeft: '5px' }}
+                  onClick={() => {
+                    updateLabel(index);
+                  }}
+                ></i>
+                <i
+                  id="iconEditLabelClose"
+                  className="fas fa-times-circle fa-lg"
+                  style={{ marginLeft: '5px' }}
+                  onClick={() => {
+                    closeInput(index);
+                  }}
+                ></i>
+                <br></br>
+              </div>
               <input
                 type={'radio'}
                 name={index}
