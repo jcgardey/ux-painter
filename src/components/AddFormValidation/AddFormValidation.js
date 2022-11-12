@@ -4,7 +4,7 @@ import ElementSelectionGif from '../Selection/ElementSelectionGif';
 // import style from '../Selection/SingleElementSelection.module.css';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
 import { usePageSelector } from '../../context/PageSelectorContext';
-import formStyle from '../Form/Form.module.css';
+import { Input } from '../Form/Form.js';
 import './AddFormValidation.css';
 
 export const AddFormValidation = ({ refactoringApplication }) => {
@@ -198,10 +198,9 @@ export const AddFormValidation = ({ refactoringApplication }) => {
                 ></i>
               </h4>
               <div style={{ display: 'none' }} ref={labels[index]}>
-                <input
+                <Input
                   style={{ display: 'inline', margin: '5px', width: '70%' }}
-                  className={`${formStyle.input}`}
-                ></input>
+                ></Input>
                 <i
                   id="iconEditLabel"
                   className="fas fa-check-circle fa-lg"
@@ -237,11 +236,10 @@ export const AddFormValidation = ({ refactoringApplication }) => {
                 }}
               ></input>
               <label>Regular expression</label>
-              <input
+              <Input
                 style={{ display: 'none', margin: '5px', width: '92%' }}
-                ref={references[index]}
-                className={formStyle.input}
-              ></input>
+                ref2={references[index]}
+              ></Input>
             </div>
           );
         })}
