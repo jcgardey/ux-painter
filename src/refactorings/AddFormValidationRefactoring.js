@@ -35,10 +35,25 @@ class AddFormValidationRefactoring extends UsabilityRefactoringOnElement {
     const me = this;
     this.getRequiredInputs().map((requiredInput, index) => {
       if (me.checkValidations(requiredInput, index)) {
-        requiredInput.style.backgroundColor = 'rgb(255,200,200)';
         invalidInputs = true;
+        if (requiredInput.nextElementSibling.id != 'error_message_' + index) {
+          requiredInput.style.backgroundColor = 'rgb(255,200,200)';
+          let error = document.createElement('p');
+          error.id = 'error_message_' + index;
+          error.style.color = 'red';
+          error.style.margin = '0px';
+          error.innerText = this.getRequiredInputXpaths()[3][index];
+          requiredInput.parentNode.insertBefore(
+            error,
+            requiredInput.nextElementSibling
+          );
+        }
       } else {
-        requiredInput.style.backgroundColor = '';
+        if (requiredInput.nextElementSibling.id == 'error_message_' + index) {
+          requiredInput.style.backgroundColor = '';
+          let node = document.getElementById('error_message_' + index);
+          requiredInput.parentNode.removeChild(node);
+        }
       }
     });
     if (invalidInputs) {
