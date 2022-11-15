@@ -8,6 +8,13 @@
 }
 
 .icon {
-    color: #00a7c7;
-    margin-left: 0.2em;
+    margin-left: 0.3em;
+}
+
+.addRule {
+    color: #feab6b;
+}
+
+.addRule:hover {
+    text-decoration: underline;
 }
