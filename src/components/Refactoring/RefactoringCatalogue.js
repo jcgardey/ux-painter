@@ -39,7 +39,7 @@ const RefactoringCatalogue = () => {
           onChange={onChange}
         />
         <i
-          className={`fas fa-search ${refactoringCatalogueStyle.searchIcon}`}
+          className={`fas fa-search fa-lg ${refactoringCatalogueStyle.searchIcon}`}
         ></i>
       </div>
       <div className={refactoringCatalogueStyle.catalogue}>
