@@ -1,5 +1,5 @@
 import {
-  REFACTORING_PREVIEW,
+  ADD_TOOLTIP_PREVIEW,
   ADD_TOOLTIP,
   SINGLE_ELEMENT_SELECTION,
 } from '../routing/types';
@@ -17,7 +17,7 @@ class AddTooltipApplication extends RefactoringApplication {
     },
     {
       title: 'Add Tooltip Preview',
-      view: REFACTORING_PREVIEW,
+      view: ADD_TOOLTIP_PREVIEW,
     },
   ];
 }

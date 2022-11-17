@@ -18,3 +18,5 @@ export const RESIZE_INPUT = 'resize_input';
 export const FORMAT_INPUT = 'format_input';
 export const DATE_INPUT_INTO_SELECTS = 'date_input_into_selects';
 export const ADD_FORM_VALIDATION = 'add_form_validation';
+
+export const ADD_TOOLTIP_PREVIEW = 'add_tooltip_preview';
