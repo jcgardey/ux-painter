@@ -23,15 +23,21 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
     this.getElement().className += ' tip';
     this.getElement().setAttribute('data-tip', this.tooltipName);
 
+    let tooltip = document.createElement('span');
+    tooltip.style.paddingTop = '10px';
+    tooltip.style.paddingBottom = '10px';
+    tooltip.style.paddingRight = '17px';
+    tooltip.style.paddingLeft = '17px';
+    tooltip.style.background = 'white';
+    tooltip.style.backgroundClip = 'paddingBox';
+    tooltip.innerHTML = this.tooltipName;
+
     let container = document.createElement('div');
     container.style.position = 'absolute';
     container.style.zIndex = 9999;
-    container.style.paddingTop = '10px';
-    container.style.paddingBottom = '10px';
-    container.style.paddingRight = '17px';
-    container.style.paddingLeft = '17px';
     container.style.display = 'none';
-    container.innerHTML = this.tooltipName;
+
+    container.appendChild(tooltip);
 
     let container2 = document.createElement('div');
     container2.style.display = 'flex';
@@ -47,11 +53,6 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
     this.getElement().addEventListener('mouseleave', (e) => {
       this.applyStyle(container, 'Mouse leave');
     });
-
-    // const me = this;
-    // this.getElement().addEventListener("mousemove", function () {
-    //   me.applyStyles(me.getTooltipElement(), me.getStyle().tooltip);
-    // });
   }
 
   checkPreconditions() {

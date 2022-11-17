@@ -21,11 +21,32 @@ class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
             this.inputStates[
               this.xpathInterpreter.getPath(e.target, document.body)
             ] = false;
+            if (
+              this.getRequiredInputs()[i].nextElementSibling.id !=
+              'error_message_' + i
+            ) {
+              let error = document.createElement('p');
+              error.id = 'error_message_' + i;
+              error.style.color = 'red';
+              error.style.margin = '0px';
+              error.innerText = this.getRequiredInputXpaths()[3][i];
+              this.getRequiredInputs()[i].parentNode.insertBefore(
+                error,
+                this.getRequiredInputs()[i].nextElementSibling
+              );
+            }
           } else {
             e.target.style.backgroundColor = '';
             this.inputStates[
               this.xpathInterpreter.getPath(e.target, document.body)
             ] = true;
+            if (
+              this.getRequiredInputs()[i].nextElementSibling.id ==
+              'error_message_' + i
+            ) {
+              let node = document.getElementById('error_message_' + i);
+              this.getRequiredInputs()[i].parentNode.removeChild(node);
+            }
           }
         } else {
           if (
@@ -40,11 +61,32 @@ class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
             this.inputStates[
               this.xpathInterpreter.getPath(e.target, document.body)
             ] = true;
+            if (
+              this.getRequiredInputs()[i].nextElementSibling.id ==
+              'error_message_' + i
+            ) {
+              let node = document.getElementById('error_message_' + i);
+              this.getRequiredInputs()[i].parentNode.removeChild(node);
+            }
           } else {
             e.target.style.backgroundColor = 'rgb(255,200,200)';
             this.inputStates[
               this.xpathInterpreter.getPath(e.target, document.body)
             ] = false;
+            if (
+              this.getRequiredInputs()[i].nextElementSibling.id !=
+              'error_message_' + i
+            ) {
+              let error = document.createElement('p');
+              error.id = 'error_message_' + i;
+              error.style.color = 'red';
+              error.style.margin = '0px';
+              error.innerText = this.getRequiredInputXpaths()[3][i];
+              this.getRequiredInputs()[i].parentNode.insertBefore(
+                error,
+                this.getRequiredInputs()[i].nextElementSibling
+              );
+            }
           }
         }
       }
@@ -54,7 +96,7 @@ class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
   onSubmit(event) {
     let invalidInput = false;
     const me = this;
-    Object.keys(this.inputStates).forEach(function (key) {
+    Object.keys(this.inputStates).forEach(function (key, index) {
       if (!me.inputStates[key]) {
         let input = me.xpathInterpreter.getSingleElementByXpath(
           key,
@@ -62,6 +104,14 @@ class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
         );
         input.style.backgroundColor = 'rgb(255,200,200)';
         invalidInput = true;
+        if (input.nextElementSibling.id != 'error_message_' + index) {
+          let error = document.createElement('p');
+          error.id = 'error_message_' + index;
+          error.style.color = 'red';
+          error.style.margin = '0px';
+          error.innerText = me.getRequiredInputXpaths()[3][index];
+          input.parentNode.insertBefore(error, input.nextElementSibling);
+        }
         return false;
       }
     });

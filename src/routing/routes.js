@@ -18,6 +18,7 @@ import {
   FORMAT_INPUT,
   DATE_INPUT_INTO_SELECTS,
   ADD_FORM_VALIDATION,
+  ADD_TOOLTIP_PREVIEW,
 } from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
@@ -34,6 +35,7 @@ import { ResizeInput } from '../components/ResizeInput/ResizeInput';
 import { FormatInput } from '../components/FormatInput/FormatInput';
 import { DateInputIntoSelects } from '../components/DateInputIntoSelects/DateInputIntoSelects';
 import { AddFormValidation } from '../components/AddFormValidation/AddFormValidation';
+import { AddTooltipPreview } from '../components/AddTooltip/AddTooltipPreview';
 
 export default [
   {
@@ -103,5 +105,9 @@ export default [
   {
     name: ADD_FORM_VALIDATION,
     Component: AddFormValidation,
+  },
+  {
+    name: ADD_TOOLTIP_PREVIEW,
+    Component: AddTooltipPreview,
   },
 ];

@@ -4,7 +4,7 @@ import ElementSelectionGif from '../Selection/ElementSelectionGif';
 // import style from '../Selection/SingleElementSelection.module.css';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
 import { usePageSelector } from '../../context/PageSelectorContext';
-import formStyle from '../Form/Form.module.css';
+import { Input } from '../Form/Form.js';
 import './AddFormValidation.css';
 
 export const AddFormValidation = ({ refactoringApplication }) => {
@@ -16,6 +16,7 @@ export const AddFormValidation = ({ refactoringApplication }) => {
   const [errorInChoice, setErrorInChoice] = useState(false);
   const [errorInRegularExpression, setErrorInRegularExpression] =
     useState(false);
+  const [errorInErrorMessage, setErrorInErrorMessage] = useState(false);
 
   const [elementSelected, setElementSelected] = useState(
     refactoring.getElement() !== null
@@ -30,6 +31,8 @@ export const AddFormValidation = ({ refactoringApplication }) => {
   const [labels, setLabels] = useState([]);
 
   const [editIcon, setEditIcon] = useState([]);
+
+  const [errorMessages, setErrorMessages] = useState([]);
 
   useEffect(() => {
     if (refactoring.getElement()) {
@@ -71,6 +74,9 @@ export const AddFormValidation = ({ refactoringApplication }) => {
 
       formValidations.push('empty');
       setFormValidations([...formValidations]);
+
+      errorMessages.push(React.createRef());
+      setErrorMessages([...errorMessages]);
     }
   };
 
@@ -110,12 +116,28 @@ export const AddFormValidation = ({ refactoringApplication }) => {
   const next = () => {
     setErrorInChoice(false);
     setErrorInRegularExpression(false);
+    setErrorInErrorMessage(false);
     let regular_expression = [];
     references.map((data) => {
       regular_expression.push(data.current.value);
     });
-    if (checkValidations()) {
-      let inputs = [requiredInputs, formValidations, regular_expression];
+    let error = false;
+    let messages = [];
+    errorMessages.map((data) => {
+      if (data.current.value != '') {
+        messages.push(data.current.value);
+      } else {
+        error = true;
+        setErrorInErrorMessage(true);
+      }
+    });
+    if (checkValidations() && error == false) {
+      let inputs = [
+        requiredInputs,
+        formValidations,
+        regular_expression,
+        messages,
+      ];
       refactoring.setRequiredInputXpaths(inputs);
       disableElementSelection();
       return elementSelected;
@@ -181,6 +203,11 @@ export const AddFormValidation = ({ refactoringApplication }) => {
               There cannot be an empty regular expression
             </p>
           )}
+          {errorInErrorMessage && (
+            <p style={{ color: 'red' }}>
+              There cannot be an empty error message
+            </p>
+          )}
         </div>
         {requiredInputsFrontend.map((data, index) => {
           return (
@@ -198,10 +225,9 @@ export const AddFormValidation = ({ refactoringApplication }) => {
                 ></i>
               </h4>
               <div style={{ display: 'none' }} ref={labels[index]}>
-                <input
+                <Input
                   style={{ display: 'inline', margin: '5px', width: '70%' }}
-                  className={`${formStyle.input}`}
-                ></input>
+                ></Input>
                 <i
                   id="iconEditLabel"
                   className="fas fa-check-circle fa-lg"
@@ -237,11 +263,16 @@ export const AddFormValidation = ({ refactoringApplication }) => {
                 }}
               ></input>
               <label>Regular expression</label>
-              <input
+              <Input
                 style={{ display: 'none', margin: '5px', width: '92%' }}
-                ref={references[index]}
-                className={formStyle.input}
-              ></input>
+                ref2={references[index]}
+                placeholder="Regular expression"
+              ></Input>
+              <Input
+                style={{ margin: '5px', width: '92%' }}
+                ref2={errorMessages[index]}
+                placeholder="Error message"
+              ></Input>
             </div>
           );
         })}

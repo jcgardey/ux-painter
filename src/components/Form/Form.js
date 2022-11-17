@@ -15,6 +15,8 @@ export const Input = ({
   value,
   placeholder = '',
   className = '',
+  style,
+  ref2,
 }) => (
   <input
     type={type}
@@ -22,6 +24,8 @@ export const Input = ({
     placeholder={placeholder}
     value={value}
     onChange={onChange}
+    style={style}
+    ref={ref2}
   />
 );
 
