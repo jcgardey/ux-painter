@@ -57,9 +57,9 @@ export const AddButton = ({ to, props, children, onClick }) => {
   );
 };
 
-export const Link = ({ to, props, children, onClick }) => {
+export const Link = ({ to, props, className, children, onClick }) => {
   return (
-    <Button to={to} props={props} onClick={onClick}>
+    <Button to={to} className={className} props={props} onClick={onClick}>
       {children}
     </Button>
   );
