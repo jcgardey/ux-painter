@@ -35,7 +35,6 @@ import { ResizeInput } from '../components/ResizeInput/ResizeInput';
 import { FormatInput } from '../components/FormatInput/FormatInput';
 import { DateInputIntoSelects } from '../components/DateInputIntoSelects/DateInputIntoSelects';
 import { AddFormValidation } from '../components/AddFormValidation/AddFormValidation';
-import { AddTooltipPreview } from '../components/AddTooltip/AddTooltipPreview';
 
 export default [
   {
@@ -105,9 +104,5 @@ export default [
   {
     name: ADD_FORM_VALIDATION,
     Component: AddFormValidation,
-  },
-  {
-    name: ADD_TOOLTIP_PREVIEW,
-    Component: AddTooltipPreview,
   },
 ];

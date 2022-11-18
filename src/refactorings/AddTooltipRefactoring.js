@@ -3,17 +3,14 @@ import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
   style = [
     {
-      name: 'Mouse enter',
+      name: 'Tooltip',
       properties: {
         color: 'black',
         backgroundColor: 'white',
-        display: 'block',
-      },
-    },
-    {
-      name: 'Mouse leave',
-      properties: {
-        display: 'none',
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        paddingRight: '17px',
+        paddingLeft: '17px',
       },
     },
   ];
@@ -24,12 +21,7 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
     this.getElement().setAttribute('data-tip', this.tooltipName);
 
     let tooltip = document.createElement('span');
-    tooltip.style.paddingTop = '10px';
-    tooltip.style.paddingBottom = '10px';
-    tooltip.style.paddingRight = '17px';
-    tooltip.style.paddingLeft = '17px';
-    tooltip.style.background = 'white';
-    tooltip.style.backgroundClip = 'paddingBox';
+    tooltip.backgroundClip = 'paddingBox';
     tooltip.innerHTML = this.tooltipName;
 
     let container = document.createElement('div');
@@ -48,10 +40,11 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
     this.getElement().appendChild(container2);
 
     this.getElement().addEventListener('mouseenter', (e) => {
-      this.applyStyle(container, 'Mouse enter');
+      container.style.display = 'block';
+      this.applyStyle(tooltip, 'Tooltip');
     });
     this.getElement().addEventListener('mouseleave', (e) => {
-      this.applyStyle(container, 'Mouse leave');
+      container.style.display = 'none';
     });
   }
 
