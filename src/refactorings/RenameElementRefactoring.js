@@ -1,6 +1,22 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement.js';
 
 class RenameElementRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Element',
+      properties: {
+        color: 'black',
+        backgroundColor: 'white',
+        textAlign: 'left',
+        marginTop: '0px',
+        marginBottom: '0px',
+        marginRight: '0px',
+        marginLeft: '0px',
+        border: 'none',
+      },
+    },
+  ];
+
   constructor() {
     super();
   }
@@ -8,6 +24,7 @@ class RenameElementRefactoring extends UsabilityRefactoringOnElement {
   transform() {
     this.oldName = this.getElement().innerHTML;
     this.getElement().innerHTML = this.getNewName();
+    this.applyStyle(this.getElement(), 'Element');
   }
 
   checkPreconditions() {
