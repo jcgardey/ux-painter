@@ -1,6 +1,21 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class AddLinkRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Link',
+      properties: {
+        color: 'blue',
+        backgroundColor: 'none',
+        paddingTop: '0px',
+        paddingBottom: '0px',
+        paddingRight: '0px',
+        paddingLeft: '0px',
+        border: 'none',
+      },
+    },
+  ];
+
   constructor() {
     super();
   }
@@ -10,7 +25,7 @@ class AddLinkRefactoring extends UsabilityRefactoringOnElement {
     this.linkElement.textContent = this.getLinkName();
     this.linkElement.href = this.getTargetURL();
     this.getElement().appendChild(this.linkElement);
-    // this.applyStyles([this.linkElement], this.getStyle().targetElement);
+    this.applyStyle(this.linkElement, 'Link');
   }
 
   checkPreconditions() {
