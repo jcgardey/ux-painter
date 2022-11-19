@@ -1,6 +1,19 @@
 import UsabilityRefactoring from './UsabilityRefactoring';
 
 class LinkToTopRefactoring extends UsabilityRefactoring {
+  style = [
+    {
+      name: 'Link',
+      properties: {
+        backgroundColor: 'none',
+        marginTop: '0px',
+        marginBottom: '0px',
+        marginRight: '0px',
+        marginLeft: '0px',
+      },
+    },
+  ];
+
   constructor() {
     super();
     this.onScroll = this.onScroll.bind(this);
@@ -16,6 +29,7 @@ class LinkToTopRefactoring extends UsabilityRefactoring {
     this.link.style.display = 'flex';
     window.addEventListener('scroll', this.onScroll(this.link));
     this.link.addEventListener('click', this.onClick);
+    this.applyStyle(this.link, 'Link');
   }
 
   checkPreconditions() {
