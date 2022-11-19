@@ -1,6 +1,22 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class TurnAttributeIntoLinkRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Element',
+      properties: {
+        color: 'none',
+        backgroundColor: 'none',
+        textAlign: 'none',
+        paddingTop: '0px',
+        paddingBottom: '0px',
+        paddingRight: '0px',
+        paddingLeft: '0px',
+        border: 'none',
+      },
+    },
+  ];
+
   transform() {
     this.linkElement = document.createElement('a');
     this.linkElement.href = this.getTargetURL();
@@ -15,7 +31,7 @@ class TurnAttributeIntoLinkRefactoring extends UsabilityRefactoringOnElement {
       this.getElement().innerHTML = '';
       this.getElement().appendChild(this.linkElement);
     }
-    // this.applyStyles([this.linkElement], this.getStyle().targetElement);
+    this.applyStyle(this.getElement(), 'Element');
   }
 
   checkPreconditions() {
