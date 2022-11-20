@@ -1,6 +1,33 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class TurnInputIntoRadiosRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Radios',
+      properties: {
+        float: 'none',
+        marginTop: '0px',
+        marginBottom: '0px',
+        marginRight: '0px',
+        marginLeft: '0px',
+      },
+    },
+    {
+      name: 'Input',
+      properties: {
+        float: 'none',
+        width: 'none',
+        color: 'black',
+        backgroundColor: 'white',
+        textAlign: 'left',
+        marginTop: '0px',
+        marginBottom: '0px',
+        marginRight: '0px',
+        marginLeft: '0px',
+      },
+    },
+  ];
+
   constructor() {
     super();
     this.values = [];
@@ -46,6 +73,7 @@ class TurnInputIntoRadiosRefactoring extends UsabilityRefactoringOnElement {
       element.style = this.getItemStyle();
       element.appendChild(radio);
       element.appendChild(label);
+      this.applyStyle(element, 'Radios');
 
       this.radios.appendChild(element);
     });
@@ -73,6 +101,7 @@ class TurnInputIntoRadiosRefactoring extends UsabilityRefactoringOnElement {
     otherElement.style = this.getItemStyle();
     otherElement.appendChild(otherRadio);
     otherElement.appendChild(otherLabel);
+    this.applyStyle(otherElement, 'Radios');
 
     return otherElement;
   }
@@ -86,6 +115,7 @@ class TurnInputIntoRadiosRefactoring extends UsabilityRefactoringOnElement {
     this.otherInput.style = otherInputStyle;
     this.otherInput.placeholder = 'Enter new value';
     this.otherInput.addEventListener('change', (e) => this.handleChange(e));
+    this.applyStyle(this.otherInput, 'Input');
 
     this.otherElementText.style.display = 'none';
     this.otherElementText.appendChild(this.otherInput);
