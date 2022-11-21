@@ -1,6 +1,33 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class TurnInputIntoSelectRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Select',
+      properties: {
+        float: 'none',
+        width: 'none',
+        color: 'black',
+        backgroundColor: 'white',
+        textAlign: 'left',
+      },
+    },
+    {
+      name: 'Input',
+      properties: {
+        float: 'none',
+        width: 'none',
+        color: 'black',
+        backgroundColor: 'white',
+        textAlign: 'left',
+        marginTop: '0px',
+        marginBottom: '0px',
+        marginRight: '0px',
+        marginLeft: '0px',
+      },
+    },
+  ];
+
   constructor() {
     super();
     this.values = [];
@@ -16,14 +43,13 @@ class TurnInputIntoSelectRefactoring extends UsabilityRefactoringOnElement {
     let selectStyle = {
       border: '',
       borderRadius: '25px 0px 0px 25px',
-      color: 'rgb(0, 0, 0)',
       height: '47.5px',
       margin: '0px 0px 5px 0px',
       padding: '10px 10px 10px 25px',
       width: '400px',
     };
     this.applyStyles([this.selectElement], selectStyle);
-    // this.applyStyles([this.selectElement], this.getStyle().targetElement);
+    super.applyStyle(this.selectElement, 'Select');
 
     this.applyStyles([this.otherElement], this.getStyle().otherInput);
   }
@@ -38,6 +64,7 @@ class TurnInputIntoSelectRefactoring extends UsabilityRefactoringOnElement {
     this.otherElement.setAttribute('type', 'text');
     this.otherElement.setAttribute('placeholder', 'Enter new value');
     this.otherElement.style.display = 'none';
+    super.applyStyle(this.otherElement, 'Input');
 
     this.selectElement = document.createElement('select');
 
@@ -113,14 +140,6 @@ class TurnInputIntoSelectRefactoring extends UsabilityRefactoringOnElement {
   getDescription() {
     return "Turn a regular text field into a select box with predefined values. 'Other' option is included to enter a different value";
   }
-
-  // setSelectStyle(style) {
-  //   this.getStyle()['targetElement'] = style;
-  // }
-
-  // setOtherInputStyle(aStyle) {
-  //   this.getStyle()['otherInput'] = aStyle;
-  // }
 }
 
 export default TurnInputIntoSelectRefactoring;
