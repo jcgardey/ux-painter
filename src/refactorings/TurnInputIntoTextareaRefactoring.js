@@ -1,6 +1,21 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class TurnInputIntoTextareaRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Text area',
+      properties: {
+        float: 'none',
+        color: 'black',
+        backgroundColor: 'white',
+        marginTop: '0px',
+        marginBottom: '0px',
+        marginRight: '0px',
+        marginLeft: '0px',
+      },
+    },
+  ];
+
   transform() {
     this.getElement().setAttribute('type', 'hidden');
     this.textArea = document.createElement('textarea');
@@ -9,7 +24,7 @@ class TurnInputIntoTextareaRefactoring extends UsabilityRefactoringOnElement {
     me.textArea.addEventListener('keyup', function () {
       me.getElement().value = me.textArea.value;
     });
-    // this.applyStyles([this.textArea], this.getStyle().targetElement);
+    this.applyStyle(this.textArea, 'Text area');
   }
 
   unDo() {
