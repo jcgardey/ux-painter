@@ -1,6 +1,6 @@
-import AddAutocompleteRefactoring from './AddAutocompleteRefactoring';
+import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
-class TurnSelectIntoAutocompleteRefactoring extends AddAutocompleteRefactoring {
+class TurnSelectIntoAutocompleteRefactoring extends UsabilityRefactoringOnElement {
   constructor() {
     super();
   }
@@ -26,8 +26,8 @@ class TurnSelectIntoAutocompleteRefactoring extends AddAutocompleteRefactoring {
       name: 'List Item Hovered',
       properties: {
         cursor: 'pointer',
-        backgroundColor: 'black',
         color: 'white',
+        backgroundColor: 'black',
       },
     },
   ];
@@ -94,7 +94,7 @@ class TurnSelectIntoAutocompleteRefactoring extends AddAutocompleteRefactoring {
     textInput.style.border = 0;
     textInput.style.width = '385px';
 
-    let container = this.createListContainer();
+    this.container = this.createListContainer();
     let container_of_suggested_values = document.createElement('div');
 
     textInput.addEventListener('keyup', (e) => {
@@ -106,16 +106,18 @@ class TurnSelectIntoAutocompleteRefactoring extends AddAutocompleteRefactoring {
       );
     });
 
-    container.appendChild(textInput);
-    container.appendChild(container_of_suggested_values);
+    this.container.appendChild(textInput);
+    this.container.appendChild(container_of_suggested_values);
 
-    this.getElement().parentNode.insertBefore(container, this.getElement());
+    this.getElement().parentNode.insertBefore(
+      this.container,
+      this.getElement()
+    );
   }
 
   unDo() {
-    super.unDo();
     this.getElement().style.display = '';
-    this.autocompleteInput.parentNode.removeChild(this.autocompleteInput);
+    this.getElement().parentNode.removeChild(this.container);
   }
 
   targetElements() {
