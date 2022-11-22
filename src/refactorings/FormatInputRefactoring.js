@@ -1,6 +1,22 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class FormatInputRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Input',
+      properties: {
+        color: 'black',
+        backgroundColor: 'white',
+        textAlign: 'left',
+        marginTop: '0px',
+        marginBottom: '0px',
+        marginRight: '0px',
+        marginLeft: '0px',
+        border: 'none',
+      },
+    },
+  ];
+
   constructor() {
     super();
     this.handler = this.handler.bind(this);
@@ -102,6 +118,7 @@ class FormatInputRefactoring extends UsabilityRefactoringOnElement {
   transform() {
     let input = this.getElement();
     input.placeholder = this.getPlaceholder();
+    this.applyStyle(input, 'Input');
     input.addEventListener('input', this.handler);
   }
 
