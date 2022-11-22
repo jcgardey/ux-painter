@@ -1,6 +1,9 @@
 import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 
 class AddLoadingOverlayRefactoring extends UsabilityRefactoringOnElement {
+  // this is necessary
+  style = [];
+
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
@@ -30,10 +33,8 @@ class AddLoadingOverlayRefactoring extends UsabilityRefactoringOnElement {
 
     this.submit = this.getElement();
 
-    // let submitCSS = this.styleScrapper.getElementComputedStyle(this.submit);
     this.button = this.submit.cloneNode(true);
     this.button.setAttribute('type', 'button');
-    // this.styleScrapper.updateElementStyle(this.button, submitCSS);
     this.button.addEventListener('click', this.onClick);
     this.submit.style.display = 'none';
     this.submit.parentNode.insertBefore(this.button, this.submit);
