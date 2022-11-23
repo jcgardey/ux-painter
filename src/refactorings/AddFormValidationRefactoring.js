@@ -2,6 +2,17 @@ import UsabilityRefactoringOnElement from './UsabilityRefactoringOnElement';
 import XPathInterpreter from '../utils/XPathInterpreter';
 
 class AddFormValidationRefactoring extends UsabilityRefactoringOnElement {
+  style = [
+    {
+      name: 'Error message',
+      properties: {
+        'font-size': '16px',
+        'font-weight': 'normal',
+        textAlign: 'left',
+      },
+    },
+  ];
+
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -48,6 +59,8 @@ class AddFormValidationRefactoring extends UsabilityRefactoringOnElement {
             requiredInput.nextElementSibling
           );
         }
+        let node = document.getElementById('error_message_' + index);
+        this.applyStyle(node, 'Error message');
       } else {
         if (requiredInput.nextElementSibling.id == 'error_message_' + index) {
           requiredInput.style.backgroundColor = '';
