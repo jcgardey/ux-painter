@@ -2,6 +2,17 @@ import AddFormValidationRefactoring from './AddFormValidationRefactoring';
 import XPathInterpreter from '../utils/XPathInterpreter';
 
 class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
+  style = [
+    {
+      name: 'Error message',
+      properties: {
+        'font-size': '16px',
+        'font-weight': 'normal',
+        textAlign: 'left',
+      },
+    },
+  ];
+
   constructor(props) {
     super(props);
     this.onBlur = this.onBlur.bind(this);
@@ -35,6 +46,8 @@ class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
                 this.getRequiredInputs()[i].nextElementSibling
               );
             }
+            let node = document.getElementById('error_message_' + i);
+            this.applyStyle(node, 'Error message');
           } else {
             e.target.style.backgroundColor = '';
             this.inputStates[
@@ -87,6 +100,8 @@ class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
                 this.getRequiredInputs()[i].nextElementSibling
               );
             }
+            let node = document.getElementById('error_message_' + i);
+            this.applyStyle(node, 'Error message');
           }
         }
       }
@@ -112,6 +127,8 @@ class AddInlineValidationRefactoring extends AddFormValidationRefactoring {
           error.innerText = me.getRequiredInputXpaths()[3][index];
           input.parentNode.insertBefore(error, input.nextElementSibling);
         }
+        let node = document.getElementById('error_message_' + index);
+        me.applyStyle(node, 'Error message');
         return false;
       }
     });
