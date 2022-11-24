@@ -96,7 +96,7 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
     this.selectYear.id = 'select_year';
     this.selectYear.style.marginBottom = '5px';
     this.selectYear.style.marginRight = '5px';
-    this.applyStyle(this.selectYear, 'Select');
+    this.applyStyle(this.selectYear, 'Selects');
 
     for (let i = new Date().getFullYear(); i >= 1970; i--) {
       this.createOption(i, this.selectYear);
@@ -117,7 +117,7 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
     this.selectMonth.id = 'select_month';
     this.selectMonth.style.marginBottom = '5px';
     this.selectMonth.style.marginRight = '5px';
-    this.applyStyle(this.selectMonth, 'Select');
+    this.applyStyle(this.selectMonth, 'Selects');
 
     let months = [
       'January',
@@ -153,7 +153,7 @@ class DateInputIntoSelectsRefactoring extends UsabilityRefactoringOnElement {
     this.selectDay.id = 'select_day';
     this.selectDay.style.marginBottom = '5px';
     this.selectDay.style.marginRight = '5px';
-    this.applyStyle(this.selectDay, 'Select');
+    this.applyStyle(this.selectDay, 'Selects');
 
     for (let i = 1; i <= 31; i++) {
       this.createOption(i, this.selectDay);
