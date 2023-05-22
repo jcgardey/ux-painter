@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import 'tipr/tipr/tipr.css';
 import { useRefactoringManager } from '../../hooks/useRefactoringManager';
 import { RefactoringItem } from './RefactoringItem';
 import refactoringCatalogueStyle from './RefactoringCatalogue.module.css';
 import { FormField, Input } from '../Form/Form';
-
-const $ = require('jquery');
-//global.jQuery = $;
-window.jQuery = $;
-require('tipr');
 
 const RefactoringCatalogue = () => {
   const manager = useRefactoringManager();
