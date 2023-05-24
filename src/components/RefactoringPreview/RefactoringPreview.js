@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
 import { AddButton, Controls, PrimaryButton } from '../Button/Button';
 import { useRefactoringManager } from '../../hooks/useRefactoringManager';
-import { REFACTORING_CATALOGUE, VERSION_LIST } from '../../routing/types';
+import { EDIT_VERSION, REFACTORING_CATALOGUE } from '../../routing/types';
 import { usePageSelector } from '../../context/PageSelectorContext';
 import { RefactoringStyle } from './RefactoringStyle';
 
@@ -43,7 +43,11 @@ const RefactoringPreview = ({ refactoringApplication }) => {
         <PrimaryButton onClick={back} to={REFACTORING_CATALOGUE}>
           Cancel <i className="fas fa-times-circle"></i>
         </PrimaryButton>
-        <AddButton onClick={refactor} to={VERSION_LIST}>
+        <AddButton
+          onClick={refactor}
+          to={EDIT_VERSION}
+          props={{ version: manager.getCurrentVersion() }}
+        >
           Refactor <i className="fas fa-hammer fa-sm"></i>
         </AddButton>
       </Controls>
