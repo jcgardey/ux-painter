@@ -1,75 +1,76 @@
-import UsabilityRefactoring from "../refactorings/UsabilityRefactoring";
+import UsabilityRefactoring from '../refactorings/UsabilityRefactoring';
 
 class Version {
-
-    constructor(aName) {
-        this.refactorings = [];
-        if (aName) {
-            this.name = aName;
-        }
+  constructor(aName) {
+    this.refactorings = [];
+    if (aName) {
+      this.name = aName;
     }
+  }
 
-    setName(aString) {
-        this.name = aString;
-    }
+  setName(aString) {
+    this.name = aString;
+  }
 
-    getName() {
-        return this.name;
-    }
+  getName() {
+    return this.name;
+  }
 
-    getRefactorings() {
-        return this.refactorings;
-    }
+  getRefactorings() {
+    return this.refactorings;
+  }
 
-    setRefactorings(refactorings) {
-        this.refactorings = refactorings;
-    }
+  setRefactorings(refactorings) {
+    this.refactorings = refactorings;
+  }
 
-    addRefactoring(aRefactoring) {
-        this.refactorings.push(aRefactoring);
-    }
+  addRefactoring(aRefactoring) {
+    this.refactorings.push(aRefactoring);
+  }
 
-    serialize() {
-        let json = {};
-        json.name = this.name;
-        json.refactorings = [];
-        for (let i = 0; i < this.refactorings.length; i++) {
-            json.refactorings.push(this.refactorings[i].serialize());
-        }
-        return json;
+  serialize() {
+    let json = {};
+    json.name = this.name;
+    json.refactorings = [];
+    for (let i = 0; i < this.refactorings.length; i++) {
+      json.refactorings.push(this.refactorings[i].serialize());
     }
+    return json;
+  }
 
-    execute() {
-        this.refactorings.map(function (refactoring) {
-           if (refactoring.getURL() == document.location.href) {
-               refactoring.execute();
-           }
-        });
-    }
+  execute() {
+    this.refactorings.map(function (refactoring) {
+      if (refactoring.getURL() == document.location.href) {
+        refactoring.execute();
+      }
+    });
+  }
 
-    unDo() {
-        this.refactorings.map(function (refactoring) {
-            if (refactoring.getURL() == document.location.href) {
-                refactoring.unDo();
-            }
-        });
-    }
+  unDo() {
+    this.refactorings.map(function (refactoring) {
+      if (refactoring.getURL() == document.location.href) {
+        refactoring.unDo();
+      }
+    });
+  }
 
-    clone() {
-        let version = new Version();
-        version.setName(this.getName());
-        version.setRefactorings(this.getRefactorings().slice());
-        return version;
-    }
+  clone() {
+    let version = new Version();
+    version.setName(this.getName());
+    version.setRefactorings(this.getRefactorings().slice());
+    return version;
+  }
 
-    static fromJSON(json) {
-        let version = new Version();
-        version.setName(json.name);
-        for (let i = 0; i < json.refactorings.length; i++) {
-            version.addRefactoring(UsabilityRefactoring.fromJSON(json.refactorings[i]));
-        }
-        return version;
+  static fromJSON(json) {
+    let version = new Version();
+    version.setName(json.name);
+    for (let i = 0; i < json.refactorings.length; i++) {
+      version.addRefactoring(
+        UsabilityRefactoring.fromJSON(json.refactorings[i])
+      );
     }
+    return version;
+  }
 }
 
 export default Version;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRefactoringManager } from '../../hooks/useRefactoringManager';
 import { REFACTORING_CATALOGUE, VERSION_LIST } from '../../routing/types';
 import {
@@ -7,43 +7,46 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from '../Button/Button';
-import editVersionStyle from './EditVersion.module.css';
+import style from './EditVersion.module.css';
 
 const AppliedRefactoring = ({ refactoring }) => (
   <p>{refactoring.constructor.asString()}</p>
 );
 
-const DirtyRefactoring = ({ refactoring }) => (
-  <p>{refactoring.constructor.asString()}*</p>
-);
-
 const EditVersion = () => {
   const manager = useRefactoringManager();
 
-  const updateVersion = () => window.refactoringManager.saveDirtyRefactorings();
+  const [appliedRefactorings, setAppliedRefactorings] = useState(
+    manager.getCurrentVersion().getRefactorings()
+  );
+
+  const [dirtyRefactorings, setDirtyRefactorings] = useState(
+    manager.getDirtyRefactorings()
+  );
+
+  const updateVersion = () => {
+    window.refactoringManager.saveDirtyRefactorings();
+    setAppliedRefactorings([...manager.getCurrentVersion().getRefactorings()]);
+    setDirtyRefactorings([...manager.getDirtyRefactorings()]);
+  };
 
   return (
     <>
-      <h4 className={editVersionStyle.title}>
+      <h4 className={style.title}>
         Version {manager.getCurrentVersion().getName()}
       </h4>
-      <div className={editVersionStyle.applied}>
-        <h5 className={editVersionStyle.appliedLegend}>Refactorings Applied</h5>
-        {manager
-          .getCurrentVersion()
-          .getRefactorings()
-          .map((refactoring) => (
-            <AppliedRefactoring refactoring={refactoring} />
-          ))}
-        {manager.getDirtyRefactorings().map((dirtyRefactoring) => (
-          <DirtyRefactoring refactoring={dirtyRefactoring} />
+      <div className={style.applied}>
+        <h5 className={style.appliedLegend}>Refactorings Applied</h5>
+        {appliedRefactorings.map((refactoring, i) => (
+          <AppliedRefactoring refactoring={refactoring} key={i} />
         ))}
-        {manager.getCurrentVersion().getRefactorings().length == 0 &&
-          manager.getDirtyRefactorings().length == 0 && (
-            <p className={editVersionStyle.noApplied}>
-              This version has no refactorings.
-            </p>
-          )}
+        <p className={style.unsaved}>Unsaved Refactorings</p>
+        {dirtyRefactorings.map((dirtyRefactoring, i) => (
+          <AppliedRefactoring refactoring={dirtyRefactoring} key={i} />
+        ))}
+        {appliedRefactorings.length == 0 && dirtyRefactorings.length == 0 && (
+          <p className={style.noApplied}>This version has no refactorings.</p>
+        )}
       </div>
       <Controls>
         <AddButton className={'btn btn-warning'} to={REFACTORING_CATALOGUE}>
@@ -54,7 +57,7 @@ const EditVersion = () => {
         <SecondaryButton to={VERSION_LIST}>
           <i className="fas fa-arrow-circle-left"></i> Back
         </SecondaryButton>
-        <PrimaryButton onClick={updateVersion} to={VERSION_LIST}>
+        <PrimaryButton onClick={updateVersion}>
           Save <i className="fas fa-save"></i>
         </PrimaryButton>
       </Controls>
