@@ -1,12 +1,12 @@
 import React from 'react';
 import { locateRefactoringApplication } from '../../refactoringsCreation/refactoringApplicationLocator';
 import { Link } from '../Button/Button';
-import itemStyle from './RefactoringItem.module.css';
+import style from './RefactoringItem.module.css';
 
 export const RefactoringItem = ({ refactoringClass }) => {
   const refactoringApplication = new (locateRefactoringApplication(
     refactoringClass.name
-  ))(new refactoringClass);
+  ))(new refactoringClass());
 
   return (
     <Link
@@ -14,12 +14,12 @@ export const RefactoringItem = ({ refactoringClass }) => {
       onClick={() => refactoringApplication.goNext()}
       props={{ refactoringApplication }}
     >
-      <div className={itemStyle.refactoring}>
+      <div className={style.refactoring}>
         <img
-          className={itemStyle.thumbnail}
+          className={style.thumbnail}
           src={chrome.runtime.getURL('resources/placeholder.jpg')}
         />
-        <p className={itemStyle.name}>{refactoringClass.asString()}</p>
+        <p className={style.name}>{refactoringClass.asString()}</p>
       </div>
     </Link>
   );

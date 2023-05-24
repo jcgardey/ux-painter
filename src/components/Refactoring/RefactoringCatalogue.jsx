@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRefactoringManager } from '../../hooks/useRefactoringManager';
 import { RefactoringItem } from './RefactoringItem';
-import refactoringCatalogueStyle from './RefactoringCatalogue.module.css';
+import style from './RefactoringCatalogue.module.css';
 import { FormField, Input } from '../Form/Form';
 
 const RefactoringCatalogue = () => {
@@ -16,27 +16,29 @@ const RefactoringCatalogue = () => {
       manager
         .getRefactoringCatalogue()
         .filter((refactoring) =>
-          refactoring.asString().toLowerCase().includes(e.target.value)
+          refactoring
+            .asString()
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase())
         )
     );
   };
 
   return (
     <>
-      <h2 className={refactoringCatalogueStyle.title}>
-        Refactorings Catalogue
-      </h2>
-      <div className={refactoringCatalogueStyle.search}>
+      <h2 className={style.title}>Refactorings Catalogue</h2>
+      <div className={style.search}>
         <Input
-          placeholder={'search refactoring'}
-          className={refactoringCatalogueStyle.searchInput}
+          placeholder={'Search refactoring'}
+          className={style.searchInput}
           onChange={onChange}
         />
-        <i
-          className={`fas fa-search fa-lg ${refactoringCatalogueStyle.searchIcon}`}
-        ></i>
+        <i className={`fas fa-search fa-lg ${style.searchIcon}`}></i>
       </div>
-      <div className={refactoringCatalogueStyle.catalogue}>
+      <div className={style.catalogue}>
+        {refactorings.length == 0 && (
+          <p className={style.searchMessage}>No refactorings found</p>
+        )}
         {refactorings.map((refactoringClass, i) => (
           <RefactoringItem key={i} refactoringClass={refactoringClass} />
         ))}

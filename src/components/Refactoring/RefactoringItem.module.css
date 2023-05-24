@@ -14,14 +14,15 @@
 }
 
 .thumbnail {
-    width: 8em;
+    width: 6em;
     height: auto;
     margin: 0.5em;
 }
 
 .name {
     margin: 1em 0.5em;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    font-weight: bold;
     color: #e76f3d;
-    width: 50%;
+    width: 70%;
 }
