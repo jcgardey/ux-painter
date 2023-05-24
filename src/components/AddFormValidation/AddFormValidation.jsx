@@ -4,7 +4,7 @@ import ElementSelectionGif from '../Selection/ElementSelectionGif';
 // import style from '../Selection/SingleElementSelection.module.css';
 import { RefactoringApplicationSteps } from '../Application/RefactoringApplicationSteps';
 import { usePageSelector } from '../../context/PageSelectorContext';
-import { Input } from '../Form/Form.js';
+import { Input } from '../Form/Form';
 import './AddFormValidation.css';
 
 export const AddFormValidation = ({ refactoringApplication }) => {
