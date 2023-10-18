@@ -14,7 +14,7 @@ class AddLoadingOverlayRefactoring extends UsabilityRefactoringOnElement {
     this.getElement().click();
     setTimeout(function () {
       document.querySelector('#overlay').style.display = 'none';
-    }, 1000);
+    }, 3000);
   }
 
   unDo() {

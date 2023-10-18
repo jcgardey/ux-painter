@@ -7,6 +7,7 @@ class UsabilityRefactoring {
   execute() {
     this.initialize();
     if (this.isApplicable()) {
+      console.log('Aplicando ', this.constructor.asString());
       this.transform();
     } else {
       console.log('Invalid refactoring');

@@ -29,7 +29,7 @@ class UsabilityRefactoringOnElement extends UsabilityRefactoring {
   }
 
   isApplicable() {
-    return this.getElement() !== undefined;
+    return this.getElement() !== null;
   }
 
   serialize() {
