@@ -3,10 +3,10 @@ import { locateRefactoringApplication } from '../../refactoringsCreation/refacto
 import { Link } from '../Button/Button';
 import style from './RefactoringItem.module.css';
 
-export const RefactoringItem = ({ refactoringClass }) => {
+export const RefactoringItem = ({ refactoring }) => {
   const refactoringApplication = new (locateRefactoringApplication(
-    refactoringClass.name
-  ))(new refactoringClass());
+    refactoring.constructor.name
+  ))(refactoring);
 
   return (
     <Link
@@ -19,7 +19,7 @@ export const RefactoringItem = ({ refactoringClass }) => {
           className={style.thumbnail}
           src={chrome.runtime.getURL('resources/placeholder.jpg')}
         />
-        <p className={style.name}>{refactoringClass.asString()}</p>
+        <p className={style.name}>{refactoring.constructor.asString()}</p>
       </div>
     </Link>
   );

@@ -39,8 +39,8 @@ const RefactoringCatalogue = () => {
         {refactorings.length == 0 && (
           <p className={style.searchMessage}>No refactorings found</p>
         )}
-        {refactorings.map((refactoringClass, i) => (
-          <RefactoringItem key={i} refactoringClass={refactoringClass} />
+        {refactorings.map((refactoring, i) => (
+          <RefactoringItem key={i} refactoring={refactoring} />
         ))}
       </div>
     </>

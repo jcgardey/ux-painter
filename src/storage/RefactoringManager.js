@@ -82,31 +82,30 @@ class RefactoringManager {
 
   getRefactoringCatalogue() {
     return [
-      AddAutocompleteRefactoring,
-      AddDatePickerRefactoring,
-      RenameElementRefactoring,
-      TurnAttributeIntoLinkRefactoring,
-      AddLinkRefactoring,
-      AddTooltipRefactoring,
-      LinkToTopRefactoring,
-      TurnInputIntoRadiosRefactoring,
-      TurnInputIntoSelectRefactoring,
-      ResizeInputRefactoring,
-      TurnInputIntoTextareaRefactoring,
-      TurnSelectIntoAutocompleteRefactoring,
-      DateInputIntoSelectsRefactoring,
-      FormatInputRefactoring,
-      AddLoadingOverlayRefactoring,
-      AddFormValidationRefactoring,
-      AddInlineValidationRefactoring,
+      new AddAutocompleteRefactoring(),
+      new AddDatePickerRefactoring(),
+      new RenameElementRefactoring(),
+      new TurnAttributeIntoLinkRefactoring(),
+      new AddLinkRefactoring(),
+      new AddTooltipRefactoring(),
+      new LinkToTopRefactoring(),
+      new TurnInputIntoRadiosRefactoring(),
+      new TurnInputIntoSelectRefactoring(),
+      new ResizeInputRefactoring(),
+      new TurnInputIntoTextareaRefactoring(),
+      new TurnSelectIntoAutocompleteRefactoring(),
+      new DateInputIntoSelectsRefactoring(),
+      new FormatInputRefactoring(),
+      new AddLoadingOverlayRefactoring(),
+      new AddFormValidationRefactoring(),
+      new AddInlineValidationRefactoring(),
     ];
   }
 
   getRefactoringClass(aString) {
-    let classes = this.getRefactoringCatalogue().filter(function (classObject) {
-      return classObject.name === aString;
-    });
-    return classes ? classes[0] : null;
+    return this.getRefactoringCatalogue().find(
+      (refactoring) => refactoring.constructor.name === aString
+    )?.constructor;
   }
 }
 
