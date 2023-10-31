@@ -49,7 +49,11 @@ class Version {
   unDo() {
     this.refactorings.map(function (refactoring) {
       if (refactoring.getURL() == document.location.href) {
-        refactoring.unDo();
+        try {
+          refactoring.unDo();
+        } catch (e) {
+          console.log(e);
+        }
       }
     });
   }

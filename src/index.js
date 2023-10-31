@@ -31,3 +31,17 @@ function toggle() {
     app.style.display = 'none';
   }
 }
+
+// mutation observer
+function callback() {
+  window.refactoringManager.executeCurrentVersion();
+}
+
+var observerOptions = {
+  childList: true,
+  attributes: true,
+  subtree: true, //Omita o ponga false si no quiere controlar los cambios en los hijos
+};
+
+var observer = new MutationObserver(callback);
+observer.observe(document.body, observerOptions);

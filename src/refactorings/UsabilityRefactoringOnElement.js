@@ -51,6 +51,10 @@ class UsabilityRefactoringOnElement extends UsabilityRefactoring {
   isTargetAnImage() {
     return this.getElement().tagName == 'IMG';
   }
+
+  initialize() {
+    this.targetElement = null;
+  }
 }
 
 export default UsabilityRefactoringOnElement;
