@@ -4,16 +4,7 @@ class RenameElementRefactoring extends UsabilityRefactoringOnElement {
   style = [
     {
       name: 'Element',
-      properties: {
-        color: 'black',
-        backgroundColor: 'white',
-        textAlign: 'left',
-        marginTop: '0px',
-        marginBottom: '0px',
-        marginRight: '0px',
-        marginLeft: '0px',
-        border: 'none',
-      },
+      properties: {},
     },
   ];
 
@@ -59,6 +50,13 @@ class RenameElementRefactoring extends UsabilityRefactoringOnElement {
 
   getDescription() {
     return "Make more clear an interactive element's label (e.g. button or link)";
+  }
+
+  isApplicable() {
+    return (
+      super.isApplicable() &&
+      (!this.oldName || this.oldName === this.getElement().innerHTML)
+    );
   }
 }
 

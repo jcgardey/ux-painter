@@ -7,6 +7,10 @@ class TurnSelectIntoAutocompleteRefactoring extends UsabilityRefactoringOnElemen
 
   style = [
     {
+      name: 'Text Input',
+      properties: {},
+    },
+    {
       name: 'List Container',
       properties: {
         padding: '5px',
@@ -35,18 +39,18 @@ class TurnSelectIntoAutocompleteRefactoring extends UsabilityRefactoringOnElemen
   createListContainer() {
     let container = document.createElement('div');
     container.style.position = 'relative';
-    container.style.zIndex = 9999;
-    container.style.width = '400px';
-    container.style.display = 'block';
-    this.applyStyle(container, 'List Container');
     return container;
   }
 
   showSuggestedValues(input, container, textInput) {
+    this.values = Array.from(this.getElement().options).map((option) => {
+      return { label: option.label, value: option.value };
+    });
+
     container.innerHTML = '';
     let suggested_values = document.createElement('div');
     const matchingValues = this.values
-      .filter((value) => value.includes(input))
+      .filter((value) => value.label.includes(input))
       .map((value) => this.createListItem(value, textInput, container));
     if (matchingValues.length > 0 && input !== '') {
       matchingValues.forEach((item) => suggested_values.appendChild(item));
@@ -59,32 +63,37 @@ class TurnSelectIntoAutocompleteRefactoring extends UsabilityRefactoringOnElemen
     let itemContainer = document.createElement('div');
     itemContainer.width = '100%';
     let item = document.createElement('span');
-    item.textContent = itemName;
+    item.textContent = itemName.label;
+    item.setAttribute('data-value', itemName.value);
     itemContainer.appendChild(item);
 
     this.applyStyle(itemContainer, 'List Item');
-    itemContainer.addEventListener('mouseenter', (e) => {
+    itemContainer.addEventListener('mouseenter', () => {
       this.applyStyle(itemContainer, 'List Item Hovered');
     });
-    itemContainer.addEventListener('mouseleave', (e) => {
+    itemContainer.addEventListener('mouseleave', () => {
       this.removeStyle(itemContainer, 'List Item Hovered');
     });
 
     itemContainer.addEventListener('click', (e) => {
-      this.getElement().value =
-        e.currentTarget.querySelector('span').textContent;
+      this.getElement().value = e.currentTarget
+        .querySelector('span')
+        .getAttribute('data-value');
       textInput.value = e.currentTarget.querySelector('span').textContent;
       container.style.display = 'none';
+      console.log(this.getElement().value);
+      console.log(this.getElement());
     });
     return itemContainer;
   }
 
+  /*
   setElement(anElement) {
     this.targetElement = anElement;
     this.values = Array.from(this.targetElement.options).map((option) => {
       return option.label;
     });
-  }
+  }*/
 
   transform() {
     this.getElement().style.display = 'none';
@@ -92,10 +101,12 @@ class TurnSelectIntoAutocompleteRefactoring extends UsabilityRefactoringOnElemen
     let textInput = document.createElement('input');
     textInput.type = 'text';
     textInput.style.border = 0;
-    textInput.style.width = '385px';
+    this.applyStyle(textInput, 'Text Input');
 
     this.container = this.createListContainer();
     let container_of_suggested_values = document.createElement('div');
+    container_of_suggested_values.style.display = 'none';
+    this.applyStyle(container_of_suggested_values, 'List Container');
 
     textInput.addEventListener('keyup', (e) => {
       this.getElement().value = e.currentTarget.value;
@@ -126,6 +137,10 @@ class TurnSelectIntoAutocompleteRefactoring extends UsabilityRefactoringOnElemen
 
   getDescription() {
     return 'Select field is turned into a text field in which the select options are suggested as the user types';
+  }
+
+  isApplicable() {
+    return super.isApplicable() && this.getElement().style.display !== 'none';
   }
 
   static asString() {

@@ -4,16 +4,7 @@ class FormatInputRefactoring extends UsabilityRefactoringOnElement {
   style = [
     {
       name: 'Input',
-      properties: {
-        color: 'black',
-        backgroundColor: 'white',
-        textAlign: 'left',
-        marginTop: '0px',
-        marginBottom: '0px',
-        marginRight: '0px',
-        marginLeft: '0px',
-        border: 'none',
-      },
+      properties: {},
     },
   ];
 
@@ -120,11 +111,13 @@ class FormatInputRefactoring extends UsabilityRefactoringOnElement {
     input.placeholder = this.getPlaceholder();
     this.applyStyle(input, 'Input');
     input.addEventListener('input', this.handler);
+    input.classList.toggle('masked-input');
   }
 
   unDo() {
     let input = this.getElement();
     input.removeEventListener('input', this.handler);
+    input.classList.toggle('masked-input');
   }
 
   targetElements() {
@@ -147,6 +140,13 @@ class FormatInputRefactoring extends UsabilityRefactoringOnElement {
     let json = super.serialize();
     json.formatString = this.getFormatString();
     return json;
+  }
+
+  isApplicable() {
+    return (
+      super.isApplicable() &&
+      !this.getElement().classList.contains('masked-input')
+    );
   }
 
   static asString() {
