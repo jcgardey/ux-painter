@@ -18,8 +18,10 @@ class AddLoadingOverlayRefactoring extends UsabilityRefactoringOnElement {
   }
 
   unDo() {
-    this.button.parentNode.removeChild(this.button);
-    this.submit.style.display = '';
+    if (this.button && this.submit) {
+      this.button.parentNode?.removeChild(this.button);
+      this.submit.style.display = '';
+    }
   }
 
   transform() {
@@ -37,11 +39,19 @@ class AddLoadingOverlayRefactoring extends UsabilityRefactoringOnElement {
     this.button.setAttribute('type', 'button');
     this.button.addEventListener('click', this.onClick);
     this.submit.style.display = 'none';
-    this.submit.parentNode.insertBefore(this.button, this.submit);
+    this.submit.parentNode.insertBefore(
+      this.button,
+      this.submit.nextElementSibling
+    );
   }
 
   targetElements() {
     return "input[type='submit'],button";
+  }
+
+  isApplicable() {
+    console.log(this.getElement());
+    return super.isApplicable() && this.getElement().style.display !== 'none';
   }
 
   static asString() {

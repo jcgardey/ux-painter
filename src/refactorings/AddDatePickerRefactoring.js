@@ -68,6 +68,13 @@ class AddDatePickerRefactoring extends UsabilityRefactoringOnElement {
   getDescription() {
     return 'Add a calendar to choose a date in a text input';
   }
+
+  isApplicable() {
+    return (
+      super.isApplicable() &&
+      !this.getElement().classList.contains('datepicker-input')
+    );
+  }
 }
 
 export default AddDatePickerRefactoring;

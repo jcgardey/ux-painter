@@ -85,6 +85,13 @@ class AddTooltipRefactoring extends UsabilityRefactoringOnElement {
   getDescription() {
     return 'Add an instant tooltip to an element to make clear its purpose';
   }
+
+  isApplicable() {
+    return (
+      super.isApplicable() &&
+      this.getElement().getAttribute('data-tip') === null
+    );
+  }
 }
 
 export default AddTooltipRefactoring;
