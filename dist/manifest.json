@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "UX Painter",
+  "version": "1.0.0",
+  "description": "A web extension for applying UI refactorings",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/default_icon.png",
+      "48": "assets/default_icon.png",
+      "128": "assets/default_icon.png"
+    }
+  },
+  "background": {
+    "service_worker": "assets/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["assets/index.css"],
+      "js": ["assets/main.js"]
+    }
+  ]
+}
