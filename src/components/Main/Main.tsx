@@ -1,5 +1,4 @@
 /*global chrome*/
-import React from 'react';
 import Frame from 'react-frame-component';
 
 const Main = () => {
