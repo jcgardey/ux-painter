@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import React from 'react';
-//import Main from './components/Main/Main';
-import style from './index.module.css';
-import './content.css';
+import Main from './components/Main/Main';
+import './index.css';
+//import './content.css';
 //import RefactoringManager from './storage/RefactoringManager';
 
 // Declare global chrome namespace for TypeScript
@@ -15,7 +15,7 @@ declare global {
 
 const app: HTMLDivElement = document.createElement('div');
 app.id = 'ux-painter-root';
-app.className = `${style.root} ${style.opened}`;
+app.className = 'w-1/3 h-full fixed top-0 right-0 bg-white shadow-lg border-l border-gray-300 z-9999 overflow-auto';
 document.body.appendChild(app);
 
 // Initialize the refactoring manager
@@ -23,7 +23,6 @@ document.body.appendChild(app);
 //window.refactoringManager.executeCurrentVersion();
 
 // Create React root and render the main component
-const Main = () => <div>UX Painter Extension</div>;
 const root = createRoot(app);
 root.render(
   <React.StrictMode>
