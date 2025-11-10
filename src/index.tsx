@@ -15,7 +15,8 @@ declare global {
 
 const app: HTMLDivElement = document.createElement('div');
 app.id = 'ux-painter-root';
-app.className = 'w-1/3 h-full fixed top-0 right-0 bg-white shadow-lg border-l border-gray-300 z-9999 overflow-auto';
+app.className =
+  'w-1/3 h-full fixed top-0 right-0 bg-white shadow-lg border-l border-gray-300 z-9999 overflow-auto';
 document.body.appendChild(app);
 
 // Initialize the refactoring manager

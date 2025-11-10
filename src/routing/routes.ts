@@ -1,25 +1,6 @@
+/*
 import VersionList from '../components/Version/VersionList';
 import Version from '../components/Version/Version';
-import {
-  ADD_AUTOCOMPLETE_SUGGESTED_VALUES,
-  EDIT_VERSION,
-  REFACTORING_CATALOGUE,
-  REFACTORING_PREVIEW,
-  SINGLE_ELEMENT_SELECTION,
-  VERSION,
-  VERSION_LIST,
-  RENAME_ELEMENT,
-  TURN_ATTRIBUTE_INTO_LINK,
-  ADD_LINK,
-  ADD_TOOLTIP,
-  TURN_INPUT_INTO_RADIOS,
-  TURN_INPUT_INTO_SELECT,
-  RESIZE_INPUT,
-  FORMAT_INPUT,
-  DATE_INPUT_INTO_SELECTS,
-  ADD_FORM_VALIDATION,
-  ADD_TOOLTIP_PREVIEW,
-} from './types';
 import EditVersion from '../components/Version/EditVersion';
 import RefactoringCatalogue from '../components/Refactoring/RefactoringCatalogue';
 import { SingleElementSelection } from '../components/Selection/SingleElementSelection';
@@ -105,4 +86,15 @@ export default [
     name: ADD_FORM_VALIDATION,
     Component: AddFormValidation,
   },
-];
+]; */
+
+import { RouteName } from './types';
+
+export type Route = {
+  name: RouteName;
+  Component: React.ComponentType<unknown>;
+};
+
+const routes: Route[] = [];
+
+export default routes;

@@ -1,9 +1,9 @@
 /*global chrome*/
 import Frame from 'react-frame-component';
+import WindowControl from '../WindowControl';
 
 const Main = () => {
   return (
-    
     <Frame
       className={'w-full h-full'}
       head={
@@ -16,9 +16,8 @@ const Main = () => {
         </>
       }
     >
-      <div id={'main-content'} className="w-full p-4 border-box">
-        <p className="text-3xl font-medium">Test</p>
-      </div>
+      <WindowControl />
+      <div id={'main-content'} className="w-full p-4 border-box"></div>
     </Frame>
   );
 };
