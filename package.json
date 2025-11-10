@@ -4,7 +4,7 @@
   "description": "UX-Painter is a web-extension that enables the creation of alternative versions of a web application by applying any combination of predefined Client-Side Web Refactorings (CSWRs). These refactorings are predefined UI transformations that intend to quickly solve user interaction problems without altering the codebase.",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch",
     "build": "tsc -b --noEmit && vite build",
     "build:extension": "vite build && node scripts/copy-assets.js",
     "preview": "vite preview",
