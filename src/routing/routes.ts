@@ -88,13 +88,20 @@ export default [
   },
 ]; */
 
+import VersionList from '@/components/Version/VersionList';
 import { RouteName } from './types';
+import React from 'react';
 
 export type Route = {
   name: RouteName;
-  Component: React.ComponentType<unknown>;
+  Component: React.FC;
 };
 
-const routes: Route[] = [];
+const routes: Route[] = [
+  {
+    name: 'VERSION_LIST',
+    Component: VersionList,
+  },
+];
 
 export default routes;

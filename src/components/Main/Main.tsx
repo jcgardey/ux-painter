@@ -1,6 +1,7 @@
 /*global chrome*/
 import Frame from 'react-frame-component';
 import WindowControl from '../WindowControl';
+import { Router } from '@/routing/Router';
 
 const Main = () => {
   return (
@@ -17,7 +18,9 @@ const Main = () => {
       }
     >
       <WindowControl />
-      <div id={'main-content'} className="w-full p-4 border-box"></div>
+      <div id={'main-content'} className="w-full p-4 border-box">
+        <Router />
+      </div>
     </Frame>
   );
 };

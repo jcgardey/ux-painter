@@ -18,7 +18,7 @@ const ROUTING_TYPES = {
   FORMAT_INPUT: 'format_input',
   DATE_INPUT_INTO_SELECTS: 'date_input_into_selects',
   ADD_FORM_VALIDATION: 'add_form_validation',
-};
+} as const;
 
 export type RouteName = keyof typeof ROUTING_TYPES;
 

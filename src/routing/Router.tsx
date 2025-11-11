@@ -2,7 +2,16 @@ import React, { createContext, useState, useContext } from 'react';
 import routes, { Route } from './routes';
 import { RouteName } from './types';
 
-const RouterContext = createContext({});
+interface RouterType {
+  show: (routeName: RouteName, props?: Record<string, unknown>) => void;
+  currentRoute?: RouteName;
+}
+
+const RouterContext = createContext<RouterType>({
+  show: () => {
+    /* default empty function */
+  },
+});
 
 type RouteWithProps = Route & { props?: Record<string, unknown> };
 
