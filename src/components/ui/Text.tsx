@@ -27,7 +27,7 @@ export const Text: React.FC<TextProps> = ({
         {children}
       </h3>
     );
-  } else {
-    return <p className={className}>{children}</p>;
+  } else if (variant === 'caption') {
+    return <p className="italic">{children}</p>;
   }
 };

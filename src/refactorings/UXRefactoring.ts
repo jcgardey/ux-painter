@@ -15,6 +15,10 @@ class UXRefactoring {
     throw new Error('Method not implemented.');
   }
 
+  print(): string {
+    return 'UX Refactoring';
+  }
+
   static fromJSON(json: Record<string, unknown>): UXRefactoring {
     throw new Error('Method not implemented.' + json.toString());
   }
