@@ -1,15 +1,21 @@
-import UsabilityRefactoring from '../refactorings/UsabilityRefactoring';
+import UXRefactoring from '@/refactorings/UXRefactoring';
+
+interface SerializedVersion {
+  name: string;
+  refactorings: Record<string, unknown>[];
+}
 
 class Version {
-  constructor(aName) {
+  name: string;
+  refactorings: UXRefactoring[];
+
+  constructor(aName: string) {
     this.refactorings = [];
-    if (aName) {
-      this.name = aName;
-    }
+    this.name = aName;
   }
 
-  setName(aString) {
-    this.name = aString;
+  setName(aNamme: string) {
+    this.name = aNamme;
   }
 
   getName() {
@@ -20,16 +26,16 @@ class Version {
     return this.refactorings;
   }
 
-  setRefactorings(refactorings) {
+  setRefactorings(refactorings: UXRefactoring[]) {
     this.refactorings = refactorings;
   }
 
-  addRefactoring(aRefactoring) {
+  addRefactoring(aRefactoring: UXRefactoring) {
     this.refactorings.push(aRefactoring);
   }
 
   serialize() {
-    let json = {};
+    let json: SerializedVersion = {} as SerializedVersion;
     json.name = this.name;
     json.refactorings = [];
     for (let i = 0; i < this.refactorings.length; i++) {
@@ -59,19 +65,15 @@ class Version {
   }
 
   clone() {
-    let version = new Version();
-    version.setName(this.getName());
+    let version = new Version(this.name + ' copy');
     version.setRefactorings(this.getRefactorings().slice());
     return version;
   }
 
-  static fromJSON(json) {
-    let version = new Version();
-    version.setName(json.name);
+  static fromJSON(json: SerializedVersion) {
+    let version = new Version(json.name);
     for (let i = 0; i < json.refactorings.length; i++) {
-      version.addRefactoring(
-        UsabilityRefactoring.fromJSON(json.refactorings[i])
-      );
+      version.addRefactoring(UXRefactoring.fromJSON(json.refactorings[i]));
     }
     return version;
   }

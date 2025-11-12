@@ -4,13 +4,7 @@ import { Button } from '../ui/button';
 import { useRouter } from '@/routing/Router';
 import { PlusIcon } from 'lucide-react';
 import { Text } from '../ui/Text';
-
-// Lightweight types to avoid leaking project internals into this file.
-export interface Version {
-  name: string;
-  unDo(): void;
-  execute(): void;
-}
+import Version from '@/storage/Version';
 
 const showSwitchingVersionOverlay = (versionName: string) => {
   const overlay = document.createElement('div');
@@ -27,27 +21,13 @@ const showSwitchingVersionOverlay = (versionName: string) => {
 };
 
 const VersionList: React.FC = () => {
-  //const manager = useRefactoringManager() as unknown as RefactoringManager;
+  const manager = window.refactoringManager;
 
   const router = useRouter();
 
-  const version = {
-    name: 'v1',
-    unDo: () => {},
-    execute: () => {},
-  };
-
-  const manager = {
-    getCurrentVersion: () => version,
-    getAllVersions: () => [version],
-    setCurrentVersion: (v: Version) => {
-      v;
-    },
-    getOriginalVersion: () => version,
-    save: () => {},
-  };
-
-  const [currentVersion, setCurrentVersion] = useState<Version>(version);
+  const [currentVersion, setCurrentVersion] = useState<Version>(
+    manager.getCurrentVersion(),
+  );
 
   const switchToVersion = (selectedVersion: Version) => {
     showSwitchingVersionOverlay(selectedVersion.name);
@@ -61,7 +41,7 @@ const VersionList: React.FC = () => {
   const handleNewVersion = () => {
     // Implementation for creating a new version goes here
     router.show('VERSION', {
-      version: manager.getOriginalVersion(),
+      version: manager.getOriginalVersion().clone(),
     });
   };
 

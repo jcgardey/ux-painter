@@ -2,13 +2,13 @@ import { createRoot } from 'react-dom/client';
 import React from 'react';
 import Main from './components/Main/Main';
 import './index.css';
-//import './content.css';
-//import RefactoringManager from './storage/RefactoringManager';
+
+import RefactoringManager from './storage/RefactoringManager';
 
 // Declare global chrome namespace for TypeScript
 declare global {
   interface Window {
-    //refactoringManager: RefactoringManager;
+    refactoringManager: RefactoringManager;
     chrome: typeof chrome;
   }
 }
@@ -20,7 +20,7 @@ app.className =
 document.body.appendChild(app);
 
 // Initialize the refactoring manager
-//window.refactoringManager = new RefactoringManager();
+window.refactoringManager = new RefactoringManager();
 //window.refactoringManager.executeCurrentVersion();
 
 // Create React root and render the main component

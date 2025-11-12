@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from '../ui/button';
 import { CopyIcon, EyeIcon, LockIcon, PencilIcon } from 'lucide-react';
-import { Version } from './VersionList';
 import { useRouter } from '@/routing/Router';
 import { Text } from '../ui/Text';
+import Version from '@/storage/Version';
 
 interface Props {
   version: Version;
