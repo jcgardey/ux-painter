@@ -91,6 +91,7 @@ export default [
 import VersionList from '@/components/Version/VersionList';
 import { RouteName } from './types';
 import React from 'react';
+import EditVersion from '@/components/Version/EditVersion';
 
 export type Route = {
   name: RouteName;
@@ -101,6 +102,10 @@ const routes: Route[] = [
   {
     name: 'VERSION_LIST',
     Component: VersionList,
+  },
+  {
+    name: 'EDIT_VERSION',
+    Component: EditVersion,
   },
 ];
 

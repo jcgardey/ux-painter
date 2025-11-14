@@ -9,18 +9,18 @@ interface Props {
   version: Version;
   current: boolean;
   switchToVersion: (v: Version) => void;
+  onCopyVersion: (v: Version) => void;
 }
 
 export const VersionListItem: React.FC<Props> = ({
   version,
   current,
   switchToVersion,
+  onCopyVersion,
 }) => {
   const router = useRouter();
 
-  const manager = {
-    getOriginalVersionName: () => 'v0',
-  };
+  const manager = window.refactoringManager;
 
   const handleEdit = () => {
     switchToVersion(version);
@@ -28,14 +28,16 @@ export const VersionListItem: React.FC<Props> = ({
   };
 
   const handleCopy = () => {
-    // Implement copy functionality here
+    onCopyVersion(version);
   };
 
   return (
     <div className="flex justify-between m-2">
-      <Text variant="h3">
+      <Text variant="large">
         {version.name}{' '}
-        {manager.getOriginalVersionName() === version.name && <LockIcon />}
+        {manager.getOriginalVersionName() === version.name && (
+          <LockIcon size={16} />
+        )}
       </Text>
       <div className="w-2/5 gap-2 flex items-center justify-end">
         <Button

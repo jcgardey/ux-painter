@@ -28,6 +28,7 @@ const VersionList: React.FC = () => {
   const [currentVersion, setCurrentVersion] = useState<Version>(
     manager.getCurrentVersion(),
   );
+  const [versions, setVersions] = useState<Version[]>(manager.getAllVersions());
 
   const switchToVersion = (selectedVersion: Version) => {
     showSwitchingVersionOverlay(selectedVersion.name);
@@ -45,17 +46,25 @@ const VersionList: React.FC = () => {
     });
   };
 
+  const handleCopyVersion = (version: Version) => {
+    // Implementation for copying a version goes here
+    setVersions([...versions, version.clone()]);
+    manager.addVersion(version.clone());
+    manager.save();
+  };
+
   return (
     <>
       <Text className="text-center">Versions</Text>
 
       <div className="my-2">
-        {manager.getAllVersions().map((version, i) => (
+        {versions.map((version, i) => (
           <VersionListItem
             key={i}
             version={version}
             current={version.name === currentVersion.name}
             switchToVersion={switchToVersion}
+            onCopyVersion={handleCopyVersion}
           />
         ))}
       </div>

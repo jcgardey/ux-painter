@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UXRefactoring from '@/refactorings/UXRefactoring';
 import { Text } from '../ui/Text';
 import { Button } from '../ui/button';
-import { ArrowLeft, ArrowRight, PlusIcon } from 'lucide-react';
+import { ArrowLeft, PlusIcon, Save } from 'lucide-react';
 import { useRouter } from '@/routing/Router';
 
 const AppliedRefactoring: React.FC<{ refactoring: UXRefactoring }> = ({
@@ -37,8 +37,8 @@ const EditVersion: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <Text className="text-center">
+    <div className="flex flex-col gap-8">
+      <Text variant="h1" className="text-center">
         Version {manager.getCurrentVersion().getName()}
       </Text>
 
@@ -49,14 +49,17 @@ const EditVersion: React.FC = () => {
           <AppliedRefactoring refactoring={refactoring} key={i} />
         ))}
 
-        <p className="text-base italic font-bold my-8">Unsaved Refactorings</p>
-
-        {dirtyRefactorings.map((dirtyRefactoring, i) => (
-          <AppliedRefactoring refactoring={dirtyRefactoring} key={i} />
-        ))}
-
         {appliedRefactorings.length === 0 && dirtyRefactorings.length === 0 && (
           <Text variant="caption">This version has no refactorings.</Text>
+        )}
+
+        {dirtyRefactorings.length > 0 && (
+          <>
+            <Text variant="large">Unsaved Refactorings</Text>
+            {dirtyRefactorings.map((dirtyRefactoring, i) => (
+              <AppliedRefactoring refactoring={dirtyRefactoring} key={i} />
+            ))}
+          </>
         )}
       </div>
 
@@ -69,7 +72,7 @@ const EditVersion: React.FC = () => {
           <ArrowLeft /> Back
         </Button>
         <Button onClick={updateVersion}>
-          Save <ArrowRight />
+          Save <Save />
         </Button>
       </div>
     </div>
