@@ -5,7 +5,8 @@
   "description": "A web extension for applying UI refactorings",
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "commands"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -42,5 +43,14 @@
         "assets/main.js"
       ]
     }
-  ]
+  ],
+  "commands": {
+    "reload": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "windows": "Ctrl+Shift+U"
+      },
+      "description": "Reload UX Painter"
+    }
+  }
 }

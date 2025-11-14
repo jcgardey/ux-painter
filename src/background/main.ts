@@ -11,3 +11,10 @@ chrome.action.onClicked.addListener(async (tab) => {
     }
   }
 });
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === 'reload') {
+    console.log('Reloading UX Painter');
+    chrome.runtime.reload();
+  }
+});
