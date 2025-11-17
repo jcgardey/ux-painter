@@ -92,10 +92,11 @@ import VersionList from '@/components/Version/VersionList';
 import { RouteName } from './types';
 import React from 'react';
 import EditVersion from '@/components/Version/EditVersion';
+import VersionForm from '@/components/Version/VersionForm';
 
 export type Route = {
   name: RouteName;
-  Component: React.FC;
+  Component: React.FC<Record<string, unknown>>;
 };
 
 const routes: Route[] = [
@@ -106,6 +107,10 @@ const routes: Route[] = [
   {
     name: 'EDIT_VERSION',
     Component: EditVersion,
+  },
+  {
+    name: 'VERSION',
+    Component: VersionForm,
   },
 ];
 
