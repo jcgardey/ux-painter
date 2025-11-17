@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tailwindcss from "@tailwindcss/vite"
+import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'path';
 
 // https://vitejs.dev/config/
@@ -26,7 +26,7 @@ export default defineConfig({
     },
     outDir: 'dist',
     assetsDir: 'assets',
-    emptyOutDir: true,
+    emptyOutDir: false,
     sourcemap: true,
     // Avoid inlining assets as base64
     assetsInlineLimit: 0,
