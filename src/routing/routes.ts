@@ -89,17 +89,11 @@ export default [
 ]; */
 
 import VersionList from '@/components/Version/VersionList';
-import { RouteName } from './types';
-import React from 'react';
 import EditVersion from '@/components/Version/EditVersion';
 import VersionForm from '@/components/Version/VersionForm';
+import { ComponentProps } from 'react';
 
-export type Route = {
-  name: RouteName;
-  Component: React.FC<Record<string, unknown>>;
-};
-
-const routes: Route[] = [
+const routes = [
   {
     name: 'VERSION_LIST',
     Component: VersionList,
@@ -112,6 +106,19 @@ const routes: Route[] = [
     name: 'VERSION',
     Component: VersionForm,
   },
-];
+] as const;
+
+// Extract RouteName from the routes array - includes all possible route names
+export type RouteName = (typeof routes)[number]['name'];
+
+// Properly narrow route type using Extract
+export type Route<T extends RouteName = RouteName> = Extract<
+  (typeof routes)[number],
+  { name: T }
+>;
+
+// Helper types for component and props extraction
+export type RouteComponent<T extends RouteName> = Route<T>['Component'];
+export type RouteProps<T extends RouteName> = ComponentProps<RouteComponent<T>>;
 
 export default routes;
